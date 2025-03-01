@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./api-go
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${SNAPPOINT_PATH}/api-go:/app
+    environment:
+      - GIN_MODE=debug
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=snappoint
+      - DB_PORT=5432
+      - JWT_SECRET=your_jwt_secret_key
+      - PORT=8080
+      - APP_ENV=dev
+      - GOFLAGS=-buildvcs=false
+      - AIR_FORCE=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+    # Add a startup delay to ensure PostgreSQL is fully ready
+    command: >
+      sh -c "echo 'Waiting for PostgreSQL to be fully ready...' &&
+             sleep 10 &&
+             echo 'Starting API service...' &&
+             cd /app && air"
+
+  postgres:
+    image: postgis/postgis:15-3.3
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=snappoint
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d snappoint -c 'SELECT 1' || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    ports:
+      - "8085:8080"
+    depends_on:
+      - postgres
+    command: ["php", "-d", "post_max_size=3G", "-d", "upload_max_filesize=3G", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
+    environment:
+      - ADMINER_DESIGN=pappu687
+
+volumes:
+  postgres_data:
+  go-cache:

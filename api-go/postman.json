@@ -1,0 +1,283 @@
+{
+    "info": {
+      "name": "Snap Point API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Feed",
+        "item": [
+          {
+            "name": "Get User Feed",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/feed?page=1&pageSize=20&sortBy=newest&timeFrame=today&latitude=41.0082&longitude=28.9784&radius=10&categories[]=cafe&categories[]=restaurant&hashtags[]=food&hashtags[]=coffee&onlyFriends=false&nearbyPlaces=false",
+                "host": ["{{base_url}}"],
+                "path": ["api", "feed"],
+                "query": [
+                  {
+                    "key": "page",
+                    "value": "1",
+                    "description": "Sayfa numarası"
+                  },
+                  {
+                    "key": "pageSize",
+                    "value": "20",
+                    "description": "Sayfa başına gösterilecek post sayısı"
+                  },
+                  {
+                    "key": "sortBy",
+                    "value": "newest",
+                    "description": "Sıralama (newest, popular, trending, friends_activity)"
+                  },
+                  {
+                    "key": "timeFrame",
+                    "value": "today",
+                    "description": "Zaman aralığı (today, this_week, this_month, all_time)"
+                  },
+                  {
+                    "key": "latitude",
+                    "value": "41.0082",
+                    "description": "Kullanıcı konumu - enlem"
+                  },
+                  {
+                    "key": "longitude",
+                    "value": "28.9784",
+                    "description": "Kullanıcı konumu - boylam"
+                  },
+                  {
+                    "key": "radius",
+                    "value": "10",
+                    "description": "Arama yarıçapı (km)"
+                  },
+                  {
+                    "key": "categories[]",
+                    "value": "cafe",
+                    "description": "Mekan kategorileri"
+                  },
+                  {
+                    "key": "hashtags[]",
+                    "value": "food",
+                    "description": "Aranacak hashtagler"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Places",
+        "item": [
+          {
+            "name": "Get Nearby Places",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/places/nearby?latitude=41.0082&longitude=28.9784&zoomLevel=15&radius=2",
+                "host": ["{{base_url}}"],
+                "path": ["api", "places", "nearby"],
+                "query": [
+                  {
+                    "key": "latitude",
+                    "value": "41.0082"
+                  },
+                  {
+                    "key": "longitude",
+                    "value": "28.9784"
+                  },
+                  {
+                    "key": "zoomLevel",
+                    "value": "15"
+                  },
+                  {
+                    "key": "radius",
+                    "value": "2"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Place Details",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/places/:id",
+                "host": ["{{base_url}}"],
+                "path": ["api", "places", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "Place ID"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Place Profile",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/places/:id/profile",
+                "host": ["{{base_url}}"],
+                "path": ["api", "places", ":id", "profile"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "Place ID"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Place Posts",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/places/:id/posts?sortBy=newest&page=1&pageSize=20&timeFrame=all_time",
+                "host": ["{{base_url}}"],
+                "path": ["api", "places", ":id", "posts"],
+                "query": [
+                  {
+                    "key": "sortBy",
+                    "value": "newest",
+                    "description": "newest, highest_rated, most_liked"
+                  },
+                  {
+                    "key": "page",
+                    "value": "1"
+                  },
+                  {
+                    "key": "pageSize",
+                    "value": "20"
+                  },
+                  {
+                    "key": "timeFrame",
+                    "value": "all_time",
+                    "description": "today, this_week, this_month, all_time"
+                  }
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "Place ID"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Interactions",
+        "item": [
+          {
+            "name": "Like Post",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "{{base_url}}/api/posts/:id/like",
+                "host": ["{{base_url}}"],
+                "path": ["api", "posts", ":id", "like"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "Post ID"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Follow User",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "{{base_url}}/api/users/:id/follow",
+                "host": ["{{base_url}}"],
+                "path": ["api", "users", ":id", "follow"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "User ID to follow"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get User Followers",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/users/:id/followers?page=1&pageSize=20",
+                "host": ["{{base_url}}"],
+                "path": ["api", "users", ":id", "followers"],
+                "query": [
+                  {
+                    "key": "page",
+                    "value": "1"
+                  },
+                  {
+                    "key": "pageSize",
+                    "value": "20"
+                  }
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "User ID"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get User Following",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "{{base_url}}/api/users/:id/following?page=1&pageSize=20",
+                "host": ["{{base_url}}"],
+                "path": ["api", "users", ":id", "following"],
+                "query": [
+                  {
+                    "key": "page",
+                    "value": "1"
+                  },
+                  {
+                    "key": "pageSize",
+                    "value": "20"
+                  }
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "description": "User ID"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost:8080",
+        "type": "string"
+      }
+    ]
+  }

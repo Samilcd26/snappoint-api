@@ -1,0 +1,88 @@
+Size sosyal medya ve konum tabanlı uygulamaların popüler özelliklerini ve ekleyebileceğimiz yeni özellikleri sıralayacağım:
+
+1. **Keşfet Özellikleri:**
+   - Trend Mekanlar (son 24 saat içinde en çok ziyaret edilen)
+   - Popüler Saatler (mekanların yoğun olduğu saatler)
+   - "Hidden Gems" (gizli kalmış, az bilinen ama yüksek puanlı yerler)
+   - Yeni Açılan Mekanlar
+   - Özel Etkinlikler ve Canlı Performanslar
+
+2. **Sosyal Özellikler:**
+   - Arkadaş Konumları (arkadaşlarınızın check-in yaptığı yerler)
+   - Mekan Listeleri Oluşturma ("Favori Kafelerim", "Gidilecek Yerler" vb.)
+   - Mekan Önerileri (arkadaşlarınızın beğendiği yerler)
+   - Grup Planlaması (arkadaşlarla buluşma noktası belirleme)
+   - Anlık Durum Paylaşımı ("Şu an burada" özelliği)
+
+3. **Gamification (Oyunlaştırma):**
+   - Rozet Sistemi (örn: "Kahve Uzmanı", "Gece Gezgini", "Gurme" rozetleri)
+   - Seviye Sistemi (daha çok yer keşfettikçe seviye atlama)
+   - Haftalık/Aylık Yarışmalar (en çok yer keşfeden kullanıcılar)
+   - Mekan Başarıları ("Bu mekanda 10 kez check-in yaptın!")
+   - Puan Çarpanları (prime time'da daha fazla puan kazanma)
+
+4. **İçerik Zenginleştirme:**
+   - Mekan İnceleme Videoları
+   - 360° Mekan Fotoğrafları
+   - Sesli İncelemeler
+   - Canlı Yayın Yapabilme
+   - Mekan Menüsü ve Fiyat Bilgileri
+   - QR Kod ile Hızlı Check-in
+
+5. **Akıllı Öneriler:**
+   - Kişiselleştirilmiş Mekan Önerileri
+   - Zaman Bazlı Öneriler (sabah kahvaltı mekanları, akşam restoranlar)
+   - Hava Durumuna Göre Öneriler (yağmurlu havada kapalı mekanlar)
+   - Bütçeye Göre Öneriler
+   - Özel Gün Önerileri (doğum günü, yıldönümü vb.)
+
+6. **Etkileşim Özellikleri:**
+   - Mekan Yorumlarına Tepki Verme
+   - Yorum Altına Yorum Yapabilme
+   - Fotoğraflara Etiket ve Mention Ekleme
+   - Mekan Sahipleriyle Direkt Mesajlaşma
+   - Toplu Etkinlik Oluşturma
+
+7. **Özel Kategoriler:**
+   - Pet Dostu Mekanlar
+   - Çocuk Dostu Mekanlar
+   - Engelli Erişimine Uygun Mekanlar
+   - Vejetaryen/Vegan Opsiyonları
+   - Çalışmaya Uygun Mekanlar (WiFi, Priz vb.)
+
+8. **Navigasyon ve Ulaşım:**
+   - Toplu Taşıma Entegrasyonu
+   - Park Yeri Bilgisi
+   - Yürüme Mesafesindeki Mekanlar
+   - Alternatif Rotalar
+   - "Yolüstü Mekanlar" önerisi
+
+9. **Rezervasyon ve Ödeme:**
+   - Mekan Rezervasyonu Yapabilme
+   - Dijital Menü ve Sipariş
+   - Grup Ödemesi (hesap bölüşme)
+   - Sadakat Programı
+   - Özel İndirimler ve Kuponlar
+
+10. **Güvenlik ve Doğrulama:**
+    - Mekan Doğrulama Sistemi
+    - Kullanıcı İnceleme Doğruluğu
+    - Sahte Check-in Önleme
+    - Kötüye Kullanım Bildirimi
+    - Güvenli Bölge İşaretleme
+
+11. **İstatistikler ve Analizler:**
+    - Kişisel Keşif Haritası
+    - Ziyaret İstatistikleri
+    - Kategori Bazlı Analiz
+    - Harcama Takibi
+    - Sosyal Etki Analizi
+
+12. **Özel Deneyimler:**
+    - AR (Artırılmış Gerçeklik) Menü Görüntüleme
+    - Sanal Tur
+    - Sesli Navigasyon
+    - Fotoğraf Filtreleri ve Efektler
+    - Özel Tema Günleri
+
+Bu özellikleri aşamalı olarak ekleyebilir ve kullanıcı geri bildirimlerine göre geliştirebiliriz. Her bir özellik için yeni endpoint'ler ve veritabanı tabloları oluşturmamız gerekecek. Hangi özellikleri öncelikli olarak eklemek istersiniz?
