@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/snap-point/api-go/models"
+	"github.com/snap-point/api-go/utils"
 	"gorm.io/gorm"
 )
 
@@ -53,7 +54,14 @@ func NewFeedController(db *gorm.DB) *FeedController {
 // @Success 200 {object} map[string]interface{}
 // @Router /feed [get]
 func (fc *FeedController) GetUserFeed(c *gin.Context) {
-	userID := c.GetUint("userID")
+	// Get user from context using utils
+	user := utils.GetUser(c)
+	if user == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found in context"})
+		return
+	}
+	userID := user.UserID
+
 	var query FeedQuery
 	if err := c.ShouldBindQuery(&query); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -174,13 +182,14 @@ func (fc *FeedController) GetUserFeed(c *gin.Context) {
 		CommentsCount   int64     `json:"commentsCount"`
 		PlaceName       string    `json:"placeName"`
 		PlaceCategories []string  `json:"placeCategories"`
+		PlacePointValue int       `json:"placePointValue"`
 		Distance        float64   `json:"distance,omitempty"`
 		IsLiked         bool      `json:"isLiked"`
 		FriendsLiked    []string  `json:"friendsLiked"`
 		CreatedAt       time.Time `json:"createdAt"`
 	}
 
-	// Get posts with all necessary information
+	// Get posts with all necessary information including conditional place point_value
 	result := db.
 		Select(`
 			posts.*,
@@ -188,6 +197,11 @@ func (fc *FeedController) GetUserFeed(c *gin.Context) {
 			users.avatar as user_avatar,
 			places.name as place_name,
 			places.categories as place_categories,
+			CASE 
+				WHEN EXISTS(SELECT 1 FROM posts p2 WHERE p2.place_id = places.id AND p2.user_id = ?) 
+				THEN 1 
+				ELSE places.base_points 
+			END as place_point_value,
 			(SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id) as likes_count,
 			(SELECT COUNT(*) FROM comments WHERE comments.post_id = posts.id) as comments_count,
 			EXISTS(SELECT 1 FROM likes WHERE likes.post_id = posts.id AND likes.user_id = ?) as is_liked,
@@ -210,7 +224,7 @@ func (fc *FeedController) GetUserFeed(c *gin.Context) {
 				AND f.follower_id = ?
 				LIMIT 3
 			) as friends_liked
-		`, userID, query.Latitude, query.Longitude, query.Latitude, query.Longitude, query.Latitude, userID).
+		`, userID, userID, query.Latitude, query.Longitude, query.Latitude, query.Longitude, query.Latitude, userID).
 		Offset(offset).
 		Limit(query.PageSize).
 		Find(&posts)

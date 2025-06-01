@@ -1,18 +1,18 @@
 # Working directory
 # . or absolute path, please note that the directories following must be under root.
-root = "."
-tmp_dir = "tmp"
+root = "/app"
+tmp_dir = "/app/tmp"
 
 [build]
     # Shell command to build the project
-    poll = true
-    cmd = "go build -o main main.go"
+    poll = false
+    cmd = "go build -o ./tmp/main ."
     # Binary file produced by `cmd`.
-    bin = "./main"
+    bin = "./tmp/main"
     # Customize binary.
-    full_bin = "./main"
+    full_bin = "./tmp/main"
     # Watch these filename extensions.
-    include_ext = ["go", "tpl", "tmpl", "html", "env"]
+    include_ext = ["go", "tpl", "tmpl", "html"]
     # Ignore these filename extensions or directories.
     exclude_dir = ["assets", "tmp", "vendor", "frontend/node_modules"]
     # Watch these directories if you specified.
@@ -25,8 +25,6 @@ tmp_dir = "tmp"
     stop_on_error = true
     # Log file location in your tmp_dir.
     log = "air_errors.log"
-    # Command to run after build.
-    run_after_build = "chmod +x main"
 
 [log]
    # Show log time

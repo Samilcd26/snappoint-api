@@ -9,8 +9,7 @@ func SetupPlaceRoutes(protected *gin.RouterGroup, placeController *controllers.P
 	places := protected.Group("/places")
 	{
 		places.GET("/nearby", placeController.GetNearbyPlaces)
-		places.GET("/:id", placeController.GetPlaceDetails)
-		places.GET("/:id/profile", placeController.GetPlaceProfile)
-		places.GET("/:id/posts", placeController.GetPlacePosts)
+		places.GET("/:placeId/profile", placeController.GetPlaceProfile)
+		places.GET("/:placeId/posts", placeController.GetPlacePosts)
 	}
 }

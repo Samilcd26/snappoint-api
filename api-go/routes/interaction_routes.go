@@ -12,11 +12,11 @@ func SetupInteractionRoutes(protected *gin.RouterGroup, interactionController *c
 		posts.POST("/:id/like", interactionController.LikePost)
 	}
 
-	// User interactions
+	// User interactions - using :userId to be consistent with other routes
 	users := protected.Group("/users")
 	{
-		users.POST("/:id/follow", interactionController.FollowUser)
-		users.GET("/:id/followers", interactionController.GetUserFollowers)
-		users.GET("/:id/following", interactionController.GetUserFollowing)
+		users.POST("/:userId/follow", interactionController.FollowUser)
+		users.GET("/:userId/followers", interactionController.GetUserFollowers)
+		users.GET("/:userId/following", interactionController.GetUserFollowing)
 	}
 }

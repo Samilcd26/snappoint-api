@@ -40,21 +40,16 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 
 		userID := uint(claims["user_id"].(float64))
-		roles, ok := claims["roles"].([]interface{})
+		role, ok := claims["role"].(string)
 		if !ok {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token claims"})
 			c.Abort()
 			return
 		}
 
-		userRoles := make([]string, len(roles))
-		for i, role := range roles {
-			userRoles[i] = role.(string)
-		}
-
 		userClaims := &utils.UserClaims{
 			UserID: userID,
-			Roles:  userRoles,
+			Role:   role,
 		}
 
 		c.Set(string(utils.UserContextKey), userClaims)

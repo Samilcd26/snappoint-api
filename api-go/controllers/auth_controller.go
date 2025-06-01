@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/snap-point/api-go/models"
@@ -29,13 +30,16 @@ func (ac *AuthController) Register(c *gin.Context) {
 		FirstName string `json:"firstName"`
 		LastName  string `json:"lastName"`
 		Phone     string `json:"phone"`
+		Role      int `json:"role"`
 	}
 
+	
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
+	fmt.Println(c)
+	
 	// Hash password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -50,6 +54,7 @@ func (ac *AuthController) Register(c *gin.Context) {
 		FirstName: input.FirstName,
 		LastName:  input.LastName,
 		Phone:     input.Phone,
+		RoleID:    uint(input.Role),
 	}
 
 	if err := ac.DB.Create(&user).Error; err != nil {
@@ -82,17 +87,17 @@ func (ac *AuthController) Login(c *gin.Context) {
 		return
 	}
 
-	// Kullanıcının rollerini al
-	var roles []string
-	if err := ac.DB.Model(&user).Association("Roles").Find(&roles); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch user roles"})
+	// Get user role
+	var role models.Role
+	if err := ac.DB.First(&role, user.RoleID).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch user role"})
 		return
 	}
 
 	// Generate JWT token
 	access_token_base := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": user.ID,
-		"roles":   roles,
+		"role":    role.Name,
 		"exp":     time.Now().Add(time.Hour * 24 * 7).Unix(), // Token expires in 7 days
 	})
 
@@ -156,17 +161,17 @@ func (ac *AuthController) RefreshToken(c *gin.Context) {
 		return
 	}
 
-	// Get user roles
-	var roles []string
-	if err := ac.DB.Model(&user).Association("Roles").Find(&roles); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch user roles", "success": false})
+	// Get user role
+	var role models.Role
+	if err := ac.DB.First(&role, user.RoleID).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch user role", "success": false})
 		return
 	}
 
 	// Generate new access token
 	accessTokenBase := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": user.ID,
-		"roles":   roles,
+		"role":    role.Name,
 		"exp":     time.Now().Add(time.Hour * 24 * 7).Unix(), // Access token expires in 7 days
 	})
 
@@ -216,6 +221,7 @@ func (ac *AuthController) GetProfile(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
+		"success": true,
 		"user": gin.H{
 			"id":        dbUser.ID,
 			"username":  dbUser.Username,
@@ -226,7 +232,7 @@ func (ac *AuthController) GetProfile(c *gin.Context) {
 			"bio":       dbUser.Bio,
 			"avatar":    dbUser.Avatar,
 			"createdAt": dbUser.CreatedAt,
-			"roles":     user.Roles,
+			"role":      user.Role,
 		},
 	})
 }

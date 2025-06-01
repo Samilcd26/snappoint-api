@@ -26,7 +26,7 @@ func InitDB() *gorm.DB {
 	}
 
 	// Auto Migrate models
-	db.AutoMigrate(&models.User{}, &models.RefreshToken{}, &models.Post{}, &models.Comment{}, &models.Like{}, &models.Follow{}, &models.Place{}, &models.ActivityLog{}, &models.Role{})
+	db.AutoMigrate(&models.User{}, &models.RefreshToken{}, &models.Post{}, &models.Comment{}, &models.Like{}, &models.Follow{}, &models.Place{}, &models.ActivityLog{}, &models.Role{}, &models.PostMedia{})
 
 	return db
 }

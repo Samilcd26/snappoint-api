@@ -271,6 +271,130 @@
             }
           }
         ]
+      },
+      {
+        "name": "Posts",
+        "item": [
+          {
+            "name": "Create Post",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"content\": \"Harika bir yer! 🌟 #istanbul #cafe\",\n    \"mediaItems\": [\n        {\n            \"mediaType\": \"photo\",\n            \"mediaUrl\": \"https://example.com/image1.jpg\",\n            \"thumbnailUrl\": \"https://example.com/thumb1.jpg\",\n            \"width\": 1920,\n            \"height\": 1080,\n            \"altText\": \"Cafe iç mekan\"\n        }\n    ],\n    \"placeId\": 1,\n    \"latitude\": 41.0082,\n    \"longitude\": 28.9784,\n    \"hashtags\": [\"istanbul\", \"cafe\"],\n    \"tags\": [\"food\", \"drinks\"],\n    \"isPublic\": true,\n    \"mood\": \"happy\",\n    \"weather\": \"sunny\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": "{{base_url}}/api/posts"
+            }
+          },
+          {
+            "name": "Like Post",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "url": "{{base_url}}/api/posts/{{postId}}/like"
+            }
+          },
+          {
+            "name": "Add Comment",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"content\": \"Harika bir post! 👍\",\n    \"parentId\": null\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": "{{base_url}}/api/posts/{{postId}}/comments"
+            }
+          },
+          {
+            "name": "Get Post Details",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "url": "{{base_url}}/api/posts/{{postId}}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "User Interactions",
+        "item": [
+          {
+            "name": "Follow User",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "url": "{{base_url}}/api/users/{{userId}}/follow"
+            }
+          },
+          {
+            "name": "Get User Followers",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/api/users/{{userId}}/followers?page=1&pageSize=20",
+                "query": [
+                  {
+                    "key": "page",
+                    "value": "1"
+                  },
+                  {
+                    "key": "pageSize",
+                    "value": "20"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     ],
     "variable": [

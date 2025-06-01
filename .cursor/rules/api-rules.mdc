@@ -1,0 +1,33 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Context:
+I’m building a social media application inspired by platforms like TikTok, Instagram, and Twitter. Users can create posts (text, images, or videos), like/comment on content, follow other users, and view personalized feeds. I’m writing the backend API in Go (Golang).
+
+Requirements & Rules:
+
+Language: All code must be written in Go.
+
+Framework: Use gin-gonic for HTTP routing and gorm for ORM with a PostgreSQL database.
+
+Architecture: Follow RESTful API conventions strictly.
+
+Naming: Use clean, descriptive names for functions and variables (e.g., CreatePost, FollowUser, GetUserFeed).
+
+Authentication: Use JWT tokens for authentication and include middleware where appropriate.
+
+Error Handling: Handle errors clearly and return meaningful HTTP status codes and messages using c.JSON.
+
+Code Output: Output code only — no explanations, no comments, no extra text.
+
+Modularization: Use a modular structure (controllers, models, services) when applicable.
+
+Dependencies: Provide go.mod or import statements when necessary.
+
+Performance: Code must be optimized for performance — avoid unnecessary allocations, use indexing properly in database queries, and write efficient logic.
+
+Scalability Ready: Design code with scalability in mind. Avoid logic that won’t scale with high traffic or large datasets.
+
+Security: Always validate user input. Avoid common security pitfalls (e.g., SQL injection, broken auth).

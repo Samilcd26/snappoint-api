@@ -9,13 +9,21 @@ func SetupPostRoutes(protected *gin.RouterGroup, postController *controllers.Pos
 	posts := protected.Group("/posts")
 	{
 		posts.POST("", postController.CreatePost)
+		posts.GET("/:id", postController.GetPostDetail)
 		posts.PUT("/:id", postController.UpdatePost)
 		posts.DELETE("/:id", postController.DeletePost)
 	}
 
-	// User posts route
+	// User posts routes
 	users := protected.Group("/users")
 	{
-		users.GET("/:id/posts", postController.GetUserPosts)
+		users.GET("/:userId/posts", postController.GetUserPosts)
+		users.GET("/:userId/places/:placeId/posts", postController.GetUserPostsAtPlace)
+	}
+
+	// Place posts routes
+	places := protected.Group("/places")
+	{
+		places.GET("/:placeId/posts/grid", postController.GetPlacePostsGrid)
 	}
 }

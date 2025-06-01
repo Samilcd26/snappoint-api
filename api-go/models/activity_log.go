@@ -8,6 +8,7 @@ import (
 
 type ActivityLog struct {
 	gorm.Model
+	CreatedAt time.Time `json:"createdAt"`
 	UserID    uint      `json:"userId" gorm:"not null"`
 	User      User      `json:"user" gorm:"foreignKey:UserID"`
 	PlaceID   uint      `json:"placeId" gorm:"not null"`
@@ -18,5 +19,4 @@ type ActivityLog struct {
 	Points    int       `json:"points" gorm:"not null;default:0"`
 	Latitude  float64   `json:"latitude" gorm:"not null;type:decimal(10,8)"`
 	Longitude float64   `json:"longitude" gorm:"not null;type:decimal(11,8)"`
-	CreatedAt time.Time `json:"createdAt"`
 }

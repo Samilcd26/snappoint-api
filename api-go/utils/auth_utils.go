@@ -6,7 +6,7 @@ import (
 
 type UserClaims struct {
 	UserID uint     `json:"user_id"`
-	Roles  []string `json:"roles"`
+	Role   string   `json:"role"`
 }
 
 type contextKey string

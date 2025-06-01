@@ -1,17 +1,16 @@
 package models
 
 import (
-	"time"
 
-	"gorm.io/gorm"
+    "gorm.io/gorm"
 )
 
 type Follow struct {
-	gorm.Model
-	FollowerID  uint
-	Follower    User
-	FollowingID uint
-	Following   User
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+    gorm.Model
+    FollowerUserID  uint   `gorm:"not null"`
+    FollowingUserID uint   `gorm:"not null"`
+    Status          string `gorm:"not null;default:'pending'"` // pending, accepted, blocked
+
+    FollowerUser  User `gorm:"foreignKey:FollowerUserID"`
+    FollowingUser User `gorm:"foreignKey:FollowingUserID"`
 }

@@ -92,11 +92,11 @@ func (ic *InteractionController) LikePost(c *gin.Context) {
 // @Tags interactions
 // @Accept json
 // @Produce json
-// @Param id path string true "User ID to follow"
+// @Param userId path string true "User ID to follow"
 // @Success 200 {object} map[string]interface{}
-// @Router /users/{id}/follow [post]
+// @Router /users/{userId}/follow [post]
 func (ic *InteractionController) FollowUser(c *gin.Context) {
-	targetUserID := c.Param("id")
+	targetUserID := c.Param("userId")
 	followerID := c.GetUint("userID") // Assuming this is set by auth middleware
 
 	var targetUser models.User
@@ -119,9 +119,9 @@ func (ic *InteractionController) FollowUser(c *gin.Context) {
 	if result.Error == gorm.ErrRecordNotFound {
 		// Create new follow
 		follow := models.Follow{
-			FollowerID:  followerID,
-			FollowingID: targetUser.ID,
-			CreatedAt:   time.Now(),
+			FollowerUserID:  followerID,
+			FollowingUserID: targetUser.ID,
+			Status:          "pending",
 		}
 
 		if err := tx.Create(&follow).Error; err != nil {
@@ -170,13 +170,13 @@ func (ic *InteractionController) FollowUser(c *gin.Context) {
 // @Tags interactions
 // @Accept json
 // @Produce json
-// @Param id path string true "User ID"
+// @Param userId path string true "User ID"
 // @Param page query integer false "Page number (default: 1)"
 // @Param pageSize query integer false "Items per page (default: 20)"
 // @Success 200 {object} map[string]interface{}
-// @Router /users/{id}/followers [get]
+// @Router /users/{userId}/followers [get]
 func (ic *InteractionController) GetUserFollowers(c *gin.Context) {
-	userID := c.Param("id")
+	userID := c.Param("userId")
 	page, _ := c.GetQuery("page")
 	pageSize, _ := c.GetQuery("pageSize")
 
@@ -228,13 +228,13 @@ func (ic *InteractionController) GetUserFollowers(c *gin.Context) {
 // @Tags interactions
 // @Accept json
 // @Produce json
-// @Param id path string true "User ID"
+// @Param userId path string true "User ID"
 // @Param page query integer false "Page number (default: 1)"
 // @Param pageSize query integer false "Items per page (default: 20)"
 // @Success 200 {object} map[string]interface{}
-// @Router /users/{id}/following [get]
+// @Router /users/{userId}/following [get]
 func (ic *InteractionController) GetUserFollowing(c *gin.Context) {
-	userID := c.Param("id")
+	userID := c.Param("userId")
 	page, _ := c.GetQuery("page")
 	pageSize, _ := c.GetQuery("pageSize")
 

@@ -10,11 +10,13 @@ import (
 func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 	// Initialize controllers
 	authController := controllers.NewAuthController(db)
+	userController := controllers.NewUserController(db)
 	postController := controllers.NewPostController(db)
 	placeController := controllers.NewPlaceController(db)
 	interactionController := controllers.NewInteractionController(db)
 	feedController := controllers.NewFeedController(db)
 	validationController := controllers.NewValidationController(db)
+	leaderboardController := controllers.NewLeaderboardController(db)
 
 	// Public routes
 	public := r.Group("/api")
@@ -33,7 +35,11 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 		protected.GET("/profile", authController.GetProfile)
 		protected.PUT("/profile", authController.UpdateProfile)
 
+		//Leaderboard routes
+		protected.GET("/leaderboard", leaderboardController.GetLeaderboard)
+
 		// Setup other routes within the protected group
+		SetupUserRoutes(protected, userController)
 		SetupPostRoutes(protected, postController)
 		SetupPlaceRoutes(protected, placeController)
 		SetupInteractionRoutes(protected, interactionController)

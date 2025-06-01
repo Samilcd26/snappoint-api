@@ -1,15 +1,16 @@
 package controllers
 
 import (
-	"fmt"
-	"log"
 	"math"
-	"math/rand"
 	"net/http"
-
-	"github.com/snap-point/api-go/models"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lib/pq"
+	"github.com/snap-point/api-go/models"
+	"github.com/snap-point/api-go/types"
+	"github.com/snap-point/api-go/utils"
 	"gorm.io/gorm"
 )
 
@@ -18,10 +19,13 @@ type PlaceController struct {
 }
 
 type NearbyPlacesQuery struct {
-	Latitude  float64 `form:"latitude" binding:"required"`
-	Longitude float64 `form:"longitude" binding:"required"`
-	ZoomLevel int     `form:"zoomLevel" binding:"required,min=1,max=20"`
-	Radius    float64 `form:"radius"`
+	Latitude       float64 `form:"latitude" binding:"required"`
+	Longitude      float64 `form:"longitude" binding:"required"`
+	ZoomLevel      int     `form:"zoomLevel" binding:"required,min=1,max=20"`
+	Radius         float64 `form:"radius"`
+	HideVisited    bool    `form:"hideVisited"`
+	CategoryFilter string  `form:"category"`
+	MaxPlaces      int     `form:"maxPlaces"`
 }
 
 type PlacePostsQuery struct {
@@ -35,9 +39,22 @@ func NewPlaceController(db *gorm.DB) *PlaceController {
 	return &PlaceController{DB: db}
 }
 
+type SimplifiedPlace struct {
+	ID         uint           `json:"id"`
+	Name       string         `json:"name"`
+	Categories pq.StringArray `json:"categories"`
+	Address    string         `json:"address"`
+	Latitude   float64        `json:"latitude"`
+	Longitude  float64        `json:"longitude"`
+	BaseScore  int            `json:"baseScore"`
+	PlaceType  string         `json:"placeType"`
+	PlaceImage string         `json:"placeImage"`
+	IsVerified bool           `json:"isVerified"`
+	Features   pq.StringArray `json:"features"`
+}
+
 // GetNearbyPlaces godoc
-// @Summary Get nearby places based on location and zoom level
-// @Description Returns places near the specified location, filtered by zoom level and rating
+// @Summary Get nearby places based on location and zoom level with filters
 // @Tags places
 // @Accept json
 // @Produce json
@@ -45,122 +62,123 @@ func NewPlaceController(db *gorm.DB) *PlaceController {
 // @Param longitude query number true "User's longitude"
 // @Param zoomLevel query integer true "Map zoom level (1-20)"
 // @Param radius query number false "Search radius in kilometers"
-// @Success 200 {array} models.Place
+// @Param hideVisited query boolean false "Hide places already visited by the user"
+// @Param userId query integer false "User ID (required if hideVisited is true)"
+// @Param category query string false "Filter by category"
+// @Param maxPlaces query integer false "Maximum number of places to return"
+// @Success 200 {object} types.NearbyPlacesResponse
 // @Router /places/nearby [get]
 func (pc *PlaceController) GetNearbyPlaces(c *gin.Context) {
-	var query NearbyPlacesQuery
-	if err := c.ShouldBindQuery(&query); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// Get user from context
+	user := utils.GetUser(c)
+	if user == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found in context"})
 		return
 	}
 
-	// İstanbul'un merkezi koordinatları
-	const (
-		istanbulLat = 41.0082
-		istanbulLon = 28.9784
-	)
+	var query NearbyPlacesQuery
+	
+	// Try to bind query parameters first
+	if err := c.ShouldBindQuery(&query); err != nil {
+		// If direct binding fails, try to parse nested params format
+		query.Latitude = parseFloat(c.Query("params[latitude]"))
+		query.Longitude = parseFloat(c.Query("params[longitude]"))
+		query.ZoomLevel = parseInt(c.Query("params[zoomLevel]"))
+		query.Radius = parseFloat(c.Query("params[radius]"))
+		query.HideVisited = parseBool(c.Query("params[hideVisited]"))
+		query.CategoryFilter = c.Query("params[category]")
+		query.MaxPlaces = parseInt(c.Query("params[maxPlaces]"))
+		
+		// Validate required fields
+		if query.Latitude == 0 || query.Longitude == 0 || query.ZoomLevel == 0 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "latitude, longitude, and zoomLevel are required",
+				"debug": gin.H{
+					"received_params": c.Request.URL.Query(),
+					"parsed_values": gin.H{
+						"latitude": query.Latitude,
+						"longitude": query.Longitude,
+						"zoomLevel": query.ZoomLevel,
+					},
+				},
+			})
+			return
+		}
+		
+		// Validate zoom level range
+		if query.ZoomLevel < 1 || query.ZoomLevel > 20 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "zoomLevel must be between 1 and 20",
+			})
+			return
+		}
+	}
 
-	// Arama yarıçapı (km cinsinden)
+	// Use user-provided coordinates and radius
+	latitude := query.Latitude
+	longitude := query.Longitude
+
+	// Default radius to 20km if not specified
 	radius := 20.0
+	if query.Radius > 0 {
+		radius = query.Radius
+	}
 
-	limit := 10 // İstenen yer sayısı
+	// Adjust radius based on zoom level (smaller radius for higher zoom)
+	radius = radius * (21 - float64(query.ZoomLevel)) / 20
 
-	var places []models.Place
-	result := pc.DB.
-		Select("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance", istanbulLat, istanbulLon, istanbulLat).
-		Where("(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) <= ?", istanbulLat, istanbulLon, istanbulLat, radius).
-		Order("distance").
-		Limit(limit).
-		Find(&places)
+	// Limit number of places to return
+	limit := 50 // Default number of places to return
+	if query.MaxPlaces > 0 && query.MaxPlaces < limit {
+		limit = query.MaxPlaces
+	}
+
+	// Build the query with conditional point_value based on user posts
+	db := pc.DB.Model(&models.Place{}).
+		Select(`id, latitude, longitude, 
+			CASE 
+				WHEN EXISTS(SELECT 1 FROM posts WHERE posts.place_id = places.id AND posts.user_id = ?) 
+				THEN 1 
+				ELSE base_points 
+			END as point_value, 
+			is_verified, 
+			(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance`,
+			user.UserID, latitude, longitude, latitude).
+		Where("(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) <= ?",
+			latitude, longitude, latitude, radius)
+
+	// Apply category filter if provided
+	if query.CategoryFilter != "" {
+		db = db.Where("? = ANY(categories)", query.CategoryFilter)
+	}
+
+	// Order by distance and limit results
+	db = db.Order("distance").Limit(limit)
+
+	var markers []types.Marker
+	result := db.Find(&markers)
 
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching places"})
 		return
 	}
 
-	if len(places) < limit {
-		artificialPlaces, err := pc.generateArtificialPlaces(istanbulLat, istanbulLon, limit-len(places))
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error generating artificial places"})
-			return
-		}
-
-		for _, place := range artificialPlaces {
-			result := pc.DB.Create(&place)
-			if result.Error != nil {
-				log.Printf("Error saving artificial place: %v", result.Error)
-				log.Printf("Place details: %+v", place)
-			} else {
-				places = append(places, place)
-			}
-		}
+	response := types.NearbyPlacesResponse{
+		Markers: markers,
+		Filters: struct {
+			Radius      float64 `json:"radius"`
+			ZoomLevel   int     `json:"zoomLevel"`
+			HideVisited bool    `json:"hideVisited"`
+			Category    string  `json:"category"`
+		}{
+			Radius:      radius,
+			ZoomLevel:   query.ZoomLevel,
+			HideVisited: query.HideVisited,
+			Category:    query.CategoryFilter,
+		},
 	}
 
-	c.JSON(http.StatusOK, places)
-}
-
-func (pc *PlaceController) generateArtificialPlaces(centerLat, centerLon float64, count int) ([]models.Place, error) {
-	const (
-		minLat = 40.8
-		maxLat = 41.2
-		minLon = 28.5
-		maxLon = 29.4
-	)
-
-	placeTypes := []string{"Park", "Restaurant", "Museum", "Cafe", "Shopping Center"}
-
-	var artificialPlaces []models.Place
-
-	for i := 0; i < count; i++ {
-		lat := minLat + rand.Float64()*(maxLat-minLat)
-		lon := minLon + rand.Float64()*(maxLon-minLon)
-
-		place := models.Place{
-			Name:        fmt.Sprintf("Artificial Place %d", i+1),
-			Description: "This is an artificially generated place in Istanbul",
-			Address:     "Generated Address in Istanbul",
-			Latitude:    lat,
-			Longitude:   lon,
-			Rating:      float64(rand.Intn(5) + 1),
-			PlaceType:   placeTypes[rand.Intn(len(placeTypes))],
-			IsVerified:  false,
-			IsGenerated: true,
-			PriceLevel:  rand.Intn(4) + 1,
-			OpeningTime: nil,
-			ClosingTime: nil,
-		}
-
-		artificialPlaces = append(artificialPlaces, place)
-	}
-
-	return artificialPlaces, nil
-}
-
-// GetPlaceDetails godoc
-// @Summary Get detailed information about a specific place
-// @Description Returns detailed place information including recent posts and rating
-// @Tags places
-// @Accept json
-// @Produce json
-// @Param id path string true "Place ID"
-// @Success 200 {object} models.Place
-// @Router /places/{id} [get]
-func (pc *PlaceController) GetPlaceDetails(c *gin.Context) {
-	id := c.Param("id")
-
-	var place models.Place
-	result := pc.DB.
-		Preload("Posts", func(db *gorm.DB) *gorm.DB {
-			return db.Order("created_at DESC").Limit(10)
-		}).
-		First(&place, id)
-
-	if result.Error != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Place not found"})
-		return
-	}
-
-	c.JSON(http.StatusOK, place)
+	c.JSON(http.StatusOK, response)
 }
 
 // GetPlaceProfile godoc
@@ -169,66 +187,112 @@ func (pc *PlaceController) GetPlaceDetails(c *gin.Context) {
 // @Tags places
 // @Accept json
 // @Produce json
-// @Param id path string true "Place ID"
+// @Param placeId path string true "Place ID"
 // @Success 200 {object} map[string]interface{}
-// @Router /places/{id}/profile [get]
+// @Router /places/{placeId}/profile [get]
 func (pc *PlaceController) GetPlaceProfile(c *gin.Context) {
-	id := c.Param("id")
+	// Get user from context
+	user := utils.GetUser(c)
+	if user == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found in context"})
+		return
+	}
 
-	var place models.Place
-	result := pc.DB.First(&place, id)
-	if result.Error != nil {
+	id := c.Param("placeId")
+
+	// Place temel bilgileri - kullanıcının post atıp atmadığına göre point_value hesapla
+	var place struct {
+		ID         uint    `json:"id"`
+		Name       string  `json:"name"`
+		Latitude   float64 `json:"latitude"`
+		Longitude  float64 `json:"longitude"`
+		PointValue int     `json:"point_value"`
+		PlaceImage string  `json:"place_image"`
+	}
+	
+	if err := pc.DB.Model(&models.Place{}).
+		Select(`id, name, latitude, longitude, place_image,
+			CASE 
+				WHEN EXISTS(SELECT 1 FROM posts WHERE posts.place_id = places.id AND posts.user_id = ?) 
+				THEN 1 
+				ELSE base_points 
+			END as point_value`, user.UserID).
+		Where("id = ?", id).
+		First(&place).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Place not found"})
 		return
 	}
 
-	// Get place statistics
+	// Stat bilgileri
 	var stats struct {
-		TotalPosts     int64   `json:"totalPosts"`
-		TotalVisitors  int64   `json:"totalVisitors"`
-		AverageRating  float64 `json:"averageRating"`
-		TotalCheckIns  int64   `json:"totalCheckIns"`
-		UniqueVisitors int64   `json:"uniqueVisitors"`
+		TotalPosts    int64     `json:"totalPosts"`
+		TotalPoints   int64     `json:"totalPoints"`
+		UniquePosters int64     `json:"uniquePosters"`
+		LastPostTime  time.Time `json:"lastPostTime"`
 	}
-
 	pc.DB.Model(&models.Post{}).Where("place_id = ?", id).Count(&stats.TotalPosts)
-	pc.DB.Model(&models.ActivityLog{}).Where("place_id = ?", id).Count(&stats.TotalCheckIns)
-	pc.DB.Model(&models.ActivityLog{}).Where("place_id = ?", id).Distinct("user_id").Count(&stats.UniqueVisitors)
+	pc.DB.Model(&models.Post{}).Where("place_id = ?", id).Select("COALESCE(SUM(earned_points), 0)").Scan(&stats.TotalPoints)
+	pc.DB.Model(&models.Post{}).Where("place_id = ?", id).Distinct("user_id").Count(&stats.UniquePosters)
+	pc.DB.Model(&models.Post{}).Where("place_id = ?", id).Select("COALESCE(MAX(created_at), ?)", time.Time{}).Scan(&stats.LastPostTime)
 
-	// Get recent activity
-	var recentActivity []struct {
-		models.ActivityLog
-		Username string `json:"username"`
+	// Kullanıcıları grupla - her kullanıcının kaç post attığını göster
+	var userPosts []struct {
+		UserID      uint      `json:"userId"`
+		Username    string    `json:"username"`
+		FirstName   string    `json:"firstName"`
+		LastName    string    `json:"lastName"`
+		Avatar      string    `json:"avatar"`
+		PostCount   int64     `json:"postCount"`
+		TotalPoints int64     `json:"totalPoints"`
+		LastPostAt  time.Time `json:"lastPostAt"`
 	}
-	pc.DB.Model(&models.ActivityLog{}).
-		Select("activity_logs.*, users.username").
-		Joins("JOIN users ON users.id = activity_logs.user_id").
-		Where("place_id = ?", id).
-		Order("created_at DESC").
-		Limit(5).
-		Find(&recentActivity)
 
-	// Get top contributors
-	var topContributors []struct {
-		UserID     uint   `json:"userId"`
-		Username   string `json:"username"`
-		PostCount  int64  `json:"postCount"`
-		TotalLikes int64  `json:"totalLikes"`
-	}
-	pc.DB.Model(&models.Post{}).
-		Select("posts.user_id, users.username, COUNT(posts.id) as post_count, SUM(COALESCE((SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id), 0)) as total_likes").
+	pc.DB.Table("posts").
+		Select(`
+			users.id as user_id,
+			users.username,
+			users.first_name,
+			users.last_name,
+			users.avatar,
+			COUNT(posts.id) as post_count,
+			COALESCE(SUM(posts.earned_points), 0) as total_points,
+			MAX(posts.created_at) as last_post_at
+		`).
 		Joins("JOIN users ON users.id = posts.user_id").
 		Where("posts.place_id = ?", id).
-		Group("posts.user_id, users.username").
+		Group("users.id, users.username, users.first_name, users.last_name, users.avatar").
+		Order("post_count DESC, last_post_at DESC").
+		Find(&userPosts)
+
+	// En çok post atan ilk 5 kullanıcıyı getir (top users için ayrı)
+	var topUsers []struct {
+		UserID      uint   `json:"id"`
+		Username    string `json:"username"`
+		FirstName   string `json:"first_name"`
+		LastName    string `json:"last_name"`
+		TotalPoints int64  `json:"total_points"`
+		PostCount   int64  `json:"post_count"`
+		Avatar      string `json:"avatar"`
+	}
+	pc.DB.Table("posts").
+		Select("user_id as user_id, users.username, users.first_name, users.last_name, users.total_points, users.avatar, COUNT(posts.id) as post_count").
+		Joins("JOIN users ON users.id = posts.user_id").
+		Where("place_id = ?", id).
+		Group("user_id, users.username, users.first_name, users.last_name, users.total_points, users.avatar").
 		Order("post_count DESC").
-		Limit(10).
-		Find(&topContributors)
+		Limit(5).
+		Scan(&topUsers)
 
 	response := gin.H{
-		"place":           place,
-		"stats":           stats,
-		"recentActivity":  recentActivity,
-		"topContributors": topContributors,
+		"id":          place.ID,
+		"name":        place.Name,
+		"latitude":    place.Latitude,
+		"longitude":   place.Longitude,
+		"point_value": place.PointValue,
+		"place_image": place.PlaceImage,
+		"stats":       stats,
+		"user_posts":  userPosts,
+		"top_users":   topUsers,
 	}
 
 	c.JSON(http.StatusOK, response)
@@ -240,15 +304,15 @@ func (pc *PlaceController) GetPlaceProfile(c *gin.Context) {
 // @Tags places
 // @Accept json
 // @Produce json
-// @Param id path string true "Place ID"
+// @Param placeId path string true "Place ID"
 // @Param sortBy query string false "Sort posts by: newest, highest_rated, most_liked"
 // @Param page query integer false "Page number (default: 1)"
 // @Param pageSize query integer false "Items per page (default: 10, max: 50)"
 // @Param timeFrame query string false "Time frame: today, this_week, this_month, all_time"
 // @Success 200 {object} map[string]interface{}
-// @Router /places/{id}/posts [get]
+// @Router /places/{placeId}/posts [get]
 func (pc *PlaceController) GetPlacePosts(c *gin.Context) {
-	id := c.Param("id")
+	id := c.Param("placeId")
 	var query PlacePostsQuery
 	if err := c.ShouldBindQuery(&query); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -313,4 +377,38 @@ func (pc *PlaceController) GetPlacePosts(c *gin.Context) {
 			"totalPages":  math.Ceil(float64(total) / float64(query.PageSize)),
 		},
 	})
+}
+
+// Helper functions for parsing query parameters
+func parseFloat(s string) float64 {
+	if s == "" {
+		return 0
+	}
+	val, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		return 0
+	}
+	return val
+}
+
+func parseInt(s string) int {
+	if s == "" {
+		return 0
+	}
+	val, err := strconv.Atoi(s)
+	if err != nil {
+		return 0
+	}
+	return val
+}
+
+func parseBool(s string) bool {
+	if s == "" {
+		return false
+	}
+	val, err := strconv.ParseBool(s)
+	if err != nil {
+		return false
+	}
+	return val
 }
