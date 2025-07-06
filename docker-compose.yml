@@ -8,19 +8,29 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ${SNAPPOINT_PATH}/api-go:/app
+      - ./api-go:/app
     environment:
       - GIN_MODE=debug
       - DB_HOST=postgres
       - DB_USER=postgres
       - DB_PASSWORD=postgres
-      - DB_NAME=snappoint
+      - DB_NAME=YERTALE
       - DB_PORT=5432
       - JWT_SECRET=your_jwt_secret_key
       - PORT=8080
       - APP_ENV=dev
       - GOFLAGS=-buildvcs=false
       - AIR_FORCE=true
+      # Google OAuth Configuration
+      - GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=your_google_client_secret
+      - GOOGLE_REDIRECT_URL=http://localhost:8080/api/auth/google/callback
+      # Cloudflare R2 Configuration
+      - CLOUDFLARE_ACCOUNT_ID=bacf59fbd001a04e3506fd29908813d0
+      - CLOUDFLARE_ACCESS_KEY_ID=27095795c7986dc286f20f95faf5a862
+      - CLOUDFLARE_SECRET_ACCESS_KEY=8fa55ab18cc0beb5f5c45c54049ee61a205781eb102a3f184a22c9a452f762e5
+      - CLOUDFLARE_BUCKET_NAME=yertale-dev
+      - CLOUDFLARE_PUBLIC_URL=https://cdn.yertale.com
     depends_on:
       postgres:
         condition: service_healthy
@@ -39,9 +49,9 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=snappoint
+      - POSTGRES_DB=YERTALE
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d snappoint -c 'SELECT 1' || exit 1"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5

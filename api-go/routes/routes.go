@@ -9,7 +9,8 @@ import (
 
 func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 	// Initialize controllers
-	authController := controllers.NewAuthController(db)
+	uploadController := controllers.NewUploadController(db)
+	authController := controllers.NewAuthController(db, uploadController)
 	userController := controllers.NewUserController(db)
 	postController := controllers.NewPostController(db)
 	placeController := controllers.NewPlaceController(db)
@@ -22,7 +23,18 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 	public := r.Group("/api")
 	{
 		public.POST("/register", authController.Register)
+		public.POST("/register/check-email", authController.RegisterEmailCheck)
+		public.POST("/register/check-username", authController.RegisterUsernameCheck)
+		public.POST("/verify-email", authController.VerifyEmail)
 		public.POST("/login", authController.Login)
+		public.POST("/google-login", authController.GoogleLogin)
+	}
+
+	// Public upload routes (no auth required for avatar during registration)
+	publicUpload := r.Group("/api")
+	{
+		publicUpload.POST("/upload/avatar/temp", uploadController.GetAvatarTempURL)
+		publicUpload.DELETE("/upload/avatar/temp/:tempKey", uploadController.CleanupTempAvatar)
 	}
 
 	// Protected routes
@@ -45,5 +57,6 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 		SetupInteractionRoutes(protected, interactionController)
 		SetupFeedRoutes(protected, feedController)
 		SetupValidationRoutes(protected, validationController)
+		SetupUploadRoutes(protected, uploadController)
 	}
 }

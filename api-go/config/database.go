@@ -5,10 +5,50 @@ import (
 	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/snap-point/api-go/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
+
+type R2Config struct {
+	AccountID       string
+	AccessKeyID     string
+	SecretAccessKey string
+	BucketName      string
+	PublicURL       string
+	Region          string
+}
+
+func GetR2Config() *R2Config {
+	return &R2Config{
+		AccountID:       os.Getenv("CLOUDFLARE_ACCOUNT_ID"),
+		AccessKeyID:     os.Getenv("CLOUDFLARE_ACCESS_KEY_ID"),
+		SecretAccessKey: os.Getenv("CLOUDFLARE_SECRET_ACCESS_KEY"),
+		BucketName:      os.Getenv("CLOUDFLARE_BUCKET_NAME"),
+		PublicURL:       os.Getenv("CLOUDFLARE_PUBLIC_URL"),
+		Region:          "auto",
+	}
+}
+
+func ConnectDatabase() (*gorm.DB, error) {
+	err := godotenv.Load()
+	if err != nil {
+		// Log the error but don't fail - might be in production without .env file
+	}
+
+	dsn := os.Getenv("DATABASE_URL")
+	if dsn == "" {
+		dsn = "host=localhost user=youruser dbname=yourdb port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	}
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
+}
 
 func InitDB() *gorm.DB {
 	dbHost := os.Getenv("DB_HOST")

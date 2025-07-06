@@ -1,0 +1,1199 @@
+{
+    "html_attributions" : [],
+    "next_page_token" : "AXQCQNSu8XwTgEn8XN7b86M4022cI0WWFeSWpUdStuXI_PCP3bQ_YwUKMqruna925rvBn7_HvUgz4Fy6_6EGruE94gy3_7VzV3teplx0KI5y9v_sD31KW26GCsmdQhTP1Knd6bADFXDsh9cUSdpp5NuHRn7GYT4IpN-kGaBzyfPC463l69Pw9gxbzSB3Low3PJKW7IYlWfgQ8oUo41Qag6raym6vVuw5CuRz-UZpCtrZSlSUnhC9qoF_-lwqtJM9AK6VdjYBA3eLrxjdaxZv6CctVLW6RPtklrbLtG-yVTvlG-6KyigztfJxn-tvQQRNvuElztraPWJIoKq19VumuFcf2SC34jNdY2kNLx78boxQ-wh59yfuA6nY8EgigICZ2ROeuGjXeuL-7NXLnXPKH0zp9t0Kl5T02EShxS2Gm1JQuXwZ",
+    "results" : 
+    [
+       {
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0082376,
+                "lng" : 28.9783589
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.19923904591783,
+                   "lng" : 29.42880493071649
+                },
+                "southwest" : 
+                {
+                   "lat" : 40.81140395097502,
+                   "lng" : 28.59555403926175
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png",
+          "icon_background_color" : "#7B9EB0",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+          "name" : "Istanbul",
+          "photos" : 
+          [
+             {
+                "height" : 558,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/101993168577779698331\"\u003eEren Ateş\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNQPpO20jr-xO79y0dJaEjbL8CchsopMpmBmjkpCHUtu9jeE0Oe4QftjB-pSXchp3yI6cqAY4CncqQ674y2N5QP9IyqLV4koLrs9VNdxmWEeZPq9kdCwEQABOKoUD-CRvoiVBpUNBUv2Zi2wYesolJVtZUGZxv3Oyr4jcton0Z-zVlGap1ztugZxXmd3G-noy9Ru2u3KFMsj6GQuLlm5rP8UzmFLN_xyDJOrPtkBLjKIsS6bbg0Ox8DW2Ly8GRPaZ2emF9OCoyT8DH3fFAnYNuyTaK_J-7HA_h45Cz2IQvdC9pRHlyy668UUTMa50fs43RCxe24vSA5GrgOYve4R9L-86zbCODBwR5iolmqFHOVr78yto1wOxGOo6X0dCwE3XBGC8QqPAXio4yHgGDV_gO5wQw9gHg6itUIi3OH1R2xHAV1WNHDX-SQK60m8HDs6u1zsam2e3WA-KcnvvHo7QX8ezx4kL21Zr0SQ0LAsXTq5VsFVh5k8xwoGzRZpbWv39XV0DBl1le-4e__I5-jCtYOgM8Vqv6tj7GhAdOrLzpCWi4hK97-tPvYm1G0bp3IVQVAzNkQk7elJCaFTTOoWydvUdvxMMSJvLi4eBtRM1YMWYq0hdxD3q8GfyBe3naCRlghweA",
+                "width" : 1080
+             }
+          ],
+          "place_id" : "ChIJawhoAASnyhQR0LABvJj-zOE",
+          "reference" : "ChIJawhoAASnyhQR0LABvJj-zOE",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "locality",
+             "political"
+          ],
+          "vicinity" : "Istanbul"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0054096,
+                "lng" : 28.9768138
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.00759925000001,
+                   "lng" : 28.97816649999999
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.00372664999998,
+                   "lng" : 28.9738633
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_islam-71.png",
+          "icon_background_color" : "#7B9EB0",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_islam_pinlet",
+          "name" : "The Blue Mosque",
+          "photos" : 
+          [
+             {
+                "height" : 480,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/117627679617943641673\"\u003eBarbaros Gemici\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNSyAHbWmqxd0j9QghEVhiOp38bYiYx1dIGFXGJZKy9cMCvKKEN7u3kuxhYMmfnPhOPe2d7r6_QpIzzI0btXfmVSz8VpsObFtoqsi8Gk5a1BfxN3FdMVbGoDHrFoWJptPCeaGd3ZcckbgOzoAffEix4OXqb3BDlZN7j3mr0ejT_LxmhP1QwPbf037Cszin7TIWPDy9ZELSGvxh7Yu63KphpH1ZRUAk-KJoSOn7zv9QgbkAz-pOP4BDFmek-CyDqE12s4Q8t8YYsWtKaMwj0RrZ4Z8w6SJfBJzBpik1oARvHTAPWWu95-CbrJRyxEk1jQUwIYI9upIq7RLZcCsQJFvZApaRHqC9oK9znhMWtiCg-LcVHhBantNWjA86OFFD3y48yQOpA9ok1e69pf6zh9M4siERxLB8e3n-Z1MZ8JT4v2gs-nrntATgrH7_w_mbwhEkr-4HL7umbRp9k3K8B31YYhAVH5Uidz8Uj6RcMiIbMk383RkXJsV8kk8xoJ7LO_OK0hBMX_ULVZO1XJBejgf6TtnOQtcquDIQkrEmF3qxTLaQEZag1ijBxFnd2Q-JW_yK7bUoGTH5QrrZhoJdMtd3sd888z5C14dVlczVG0dBXTftkJ8jQ_xCOLvW8lb7GS",
+                "width" : 734
+             }
+          ],
+          "place_id" : "ChIJ4fRwZb25yhQRpHwVijb3LeU",
+          "plus_code" : 
+          {
+             "compound_code" : "2X4G+5P Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X4G+5P"
+          },
+          "rating" : 4.7,
+          "reference" : "ChIJ4fRwZb25yhQRpHwVijb3LeU",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "mosque",
+             "tourist_attraction",
+             "place_of_worship",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 107122,
+          "vicinity" : "Binbirdirek, At Meydanı Caddesi No:10"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.01325670000001,
+                "lng" : 28.97761199999999
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0145648302915,
+                   "lng" : 28.9788976302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.01186686970851,
+                   "lng" : 28.9761996697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Orient Express & Spa by Orka Hotels",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 3449,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/110921849677727866437\"\u003eOrient Express &amp; Spa by Orka Hotels\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNShYQ2kzB7-WFy6SfWhGbiU3AHTMG_KYXtpd0cyWW3BzeVpwNWCV74MHzfmSbipmm8Dqf8J2Q0qIvSGgWbO3nrFu11v-zTzMvpdE1er_iRrPfOn20KjvX4aUFeC1LsmkhrFTd3Uk_akD0RmKpdXvWBtGYwwdHWzwDKkMLlJonu9ZKaQOeniKSFiblH0n1mXZfGa2odM0sNi8NNrMd6EMCI7l83VFso3ooDffYL8kp8biAWjMa8OVchpxDyRuy8RZEouAyViTiERD_n3GICa5Gni3TbVWc1xUt0GbLO_o9Jv2hac3Aocnw-WkfnKJSB5DbjmrLSRe-A",
+                "width" : 2100
+             }
+          ],
+          "place_id" : "ChIJbUDBCsC5yhQRrbehwLl8acs",
+          "plus_code" : 
+          {
+             "compound_code" : "2X7H+82 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X7H+82"
+          },
+          "rating" : 4,
+          "reference" : "ChIJbUDBCsC5yhQRrbehwLl8acs",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "cafe",
+             "bar",
+             "spa",
+             "lodging",
+             "restaurant",
+             "food",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 1014,
+          "vicinity" : "Old City Sirkeci, Hoca Paşa, Hüdavendigar Caddesi No:24"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0080471,
+                "lng" : 28.9770171
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0093320802915,
+                   "lng" : 28.9783499302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0066341197085,
+                   "lng" : 28.9756519697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Star Holiday Hotel",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 834,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/103308838065060883757\"\u003eStar Holiday Hotel\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNRf0eEOXTHhcrqw7K_aTEKhF1qXsRjiZm59NH8nude8CXv6vs4IgPtVSmt_JiyT3bfBuxVwIOuD_afaLZEg__uTH-LrCOnAiE_IE5gegWLkxO1wIUvw4oxz6YTMk7ZXza03HC3Tr0MwEqpfvAiZiNkdYa59fhn80I9A0K5OZicr_dQeSFphFB0rLAKmz-eHdimnKXFVZ3-h9wgyPESVxMfdNeG2X7UypZmSYz3O7ZVMF5sOXxunY3U4Y8zkjCOVSLGotkwca0EkiMIM2MSazFCh1Hg38CE3-VHlTTT3m67vGptsDVxSjnuxD9jfjlhaswkqh-NdCrE",
+                "width" : 768
+             }
+          ],
+          "place_id" : "ChIJiTW_8b25yhQR1WY2jcM3v0U",
+          "plus_code" : 
+          {
+             "compound_code" : "2X5G+6R Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X5G+6R"
+          },
+          "rating" : 4,
+          "reference" : "ChIJiTW_8b25yhQR1WY2jcM3v0U",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 519,
+          "vicinity" : "Alemdar, Divan Yolu Caddesi No:10"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0032502,
+                "lng" : 28.9806732
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0045257302915,
+                   "lng" : 28.9820911802915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0018277697085,
+                   "lng" : 28.9793932197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Kalyon Hotel Istanbul",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 1067,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/105049602330162656626\"\u003eKalyon Hotel\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNSbb5lNgjowqVtHxiZx7j3ZsfNxwKXFxKwOw_sRpcaT8qvqHSK5WkbxCh_el6z25elopLXezxOdq6DVbbWASL4no7HrjHx8bvt2B2hpNG_fryTOvOTcmxEYE8z8si8agfXFG1D--IQGrnzJJf1NXFboLSMeu0yylEEetzwuVMwUcnviU4UvxKYnRgkXoBthg1fa-ZXz8A48b57ZwkecFaSOCjMnuXdBvFBaRH8qVcZzx3OkQQjV9eYIP1MKaORCAFkpA_mfxgePgyjW8PL9QF7c16myDA2ab8GtV1MIhebDgK8O2-8TVfMxz-AjMXcrTxP7fSDntMI",
+                "width" : 1600
+             }
+          ],
+          "place_id" : "ChIJz1zViZi5yhQRL9LY_cTYc8w",
+          "plus_code" : 
+          {
+             "compound_code" : "2X3J+87 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X3J+87"
+          },
+          "rating" : 4.2,
+          "reference" : "ChIJz1zViZi5yhQRL9LY_cTYc8w",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 1668,
+          "vicinity" : "Sultan Ahmet, Kennedy Caddesi no:34"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.003058,
+                "lng" : 28.973929
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0044467802915,
+                   "lng" : 28.9752783302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0017488197085,
+                   "lng" : 28.9725803697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Hotel Amira Istanbul",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 4480,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/108250559863776365955\"\u003eHotel Amira Istanbul\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNQOsmcAGLS-q8R7L7slDs16qXk1_7wbXWMoKqmrf8zEL59pVBsjswB7vhSzBkNyTAxrKmnNz5yez-0MeBejg0nbBjNiKkXKqQYjBK-mfXAuQimASZraCJZDCxN1gVwD72aEIbF2GmUSlfeA3locAutLy6z1ESZgzfkqajsquz8hk0RC0OB7TnasJdjeRtitubVcu9GWj5H6jiEb3R0p6iCcJ48Kd6mZCMz62uwxgMg0WJ_qZ6xdJAIgJQc6FkHj07gPhLeJDgY3MdMEa8s3f7byWzyZXclqxHtuZ1A92UCIi27izEZ7g58S84MvqEdKwv6i_5_0PYU",
+                "width" : 6720
+             }
+          ],
+          "place_id" : "ChIJr18WRZi5yhQRd2UBDpmH0t4",
+          "plus_code" : 
+          {
+             "compound_code" : "2X3F+6H Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X3F+6H"
+          },
+          "rating" : 4.7,
+          "reference" : "ChIJr18WRZi5yhQRd2UBDpmH0t4",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 905,
+          "vicinity" : "Küçük Ayasofya, Mustafa Paşa Sokak No:43"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0065918,
+                "lng" : 28.98021469999999
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0078043802915,
+                   "lng" : 28.9816953302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0051064197085,
+                   "lng" : 28.9789973697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Four Seasons Hotel Istanbul At Sultanahmet",
+          "photos" : 
+          [
+             {
+                "height" : 1256,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/116315352791262354813\"\u003eFour Seasons Hotel Istanbul At Sultanahmet\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNQRSMqk1umEXTRFc9s4HJIlR0hEbyQ3C9rHuMclaavrB0J2k28XaC6zMtUv3aTv5AxYNf5VW2TACbFSo6R_wKhADzK_ZFMcooSrfNiXkMswzEdYU61de6cFvYDnuJGklagEqggFlt1WXN9xlS1ftSIkimGUnnji5PS1YUftpXfvWilta_KE4bVbwQvhJ3ZkA0rv3uIgH0ledtwmPE1FdozYBZVcg_m88kZcklYABYoR1Lo7ITFE3uKQMeuzktY8sEhGK-VCa8XrUVK_eI7VSG_3TXTQTx-Ee0wXHpxpsgvMvoxsG4ySgJiQ1F7tdzLyVT0jIpXQmTI",
+                "width" : 1765
+             }
+          ],
+          "place_id" : "ChIJJY3KRby5yhQRfZfjmnZp1qU",
+          "plus_code" : 
+          {
+             "compound_code" : "2X4J+J3 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X4J+J3"
+          },
+          "rating" : 4.6,
+          "reference" : "ChIJJY3KRby5yhQRfZfjmnZp1qU",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "spa",
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 2520,
+          "vicinity" : "Sultanahmet, Tevkifhane Sokak No:1"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0059323,
+                "lng" : 28.9795648
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0073069302915,
+                   "lng" : 28.9809421802915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0046089697085,
+                   "lng" : 28.9782442197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Avrasya Hostel",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 1800,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/116086327616114669876\"\u003eistanbul Avrasya Hostel\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNSlHPVXhiyRjz5kX1o-pfKxYaxo7arSTUOCSiJt6_Y-pk9Geh5IkLktgVeXI_8VXNGgpT1SX9F3wEIb1urC0d6_GytGHEF9j-4hLNoBv45-amL7SySDqVdnRqZllUpWWeXFckCpvOcJ3OYhosHftr3NH5rIr2jcyG-pjO2Qx08gNy80SpY1IQCt5PRmU5BTDWMZfa-6aPHv_jKIfqcUFrl6ZbUVSqeBr-tmsgVGewhJIEHI-cxTg6vSI7Nuz4QAdmLXf0Yj-nL8Zh7I9w0xjSnknjo-kDG4aNDMHCu0ZkdijZ3FGaHEnyc6Co1MkNG6DLMGBmcNK58",
+                "width" : 1440
+             }
+          ],
+          "place_id" : "ChIJl-hIWry5yhQRYUzKzt5MESs",
+          "plus_code" : 
+          {
+             "compound_code" : "2X4H+9R Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X4H+9R"
+          },
+          "rating" : 4.2,
+          "reference" : "ChIJl-hIWry5yhQRYUzKzt5MESs",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 280,
+          "vicinity" : "Cankurtaran, Seyit Hasan Sokak No:12"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0089492,
+                "lng" : 28.97744269999999
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0105662302915,
+                   "lng" : 28.97858563029149
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0078682697085,
+                   "lng" : 28.9758876697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "The And Hotel",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 9992,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/110576711707335806611\"\u003eThe And Hotel\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNR-kM7MMk-MhIOhrt2wIEofPCrxBT6-5Xn9MbjuLEMHbFpOSnGAbG_ERZ8KcE8vf54IBbxeVrjpeRS0mLiixcYw_oLN0z9EFfY-3nHZcy1BMGWVseGf4s5F91ixq1-4BTYgsjW3_t83bS70c-Ndptve95u7RGLNPW-5sjF7VUIXnGGTWpkE9SUeJ6bJUSLKqBkGrynIRT8de1JEg1Tz9wpS78iAud_qAS8to5PzQtdhiBmVrSBohV8ZrC3qJtpqVAbvJPCCkGQ1BYHEfe445sIjTClnbTsHMNEzMReSJ-wf71Y5V-cDfI1uV7F7D9m3SNfq0bQZLRE",
+                "width" : 9857
+             }
+          ],
+          "place_id" : "ChIJaS9yDb65yhQRG6hUN6Vkawk",
+          "plus_code" : 
+          {
+             "compound_code" : "2X5G+HX Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X5G+HX"
+          },
+          "rating" : 4.6,
+          "reference" : "ChIJaS9yDb65yhQRG6hUN6Vkawk",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 752,
+          "vicinity" : "Alemdar, Yerebatan Caddesi No:18"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0137382,
+                "lng" : 28.9766291
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.01510363029149,
+                   "lng" : 28.9779052802915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0124056697085,
+                   "lng" : 28.9752073197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Neorion Hotel",
+          "photos" : 
+          [
+             {
+                "height" : 4272,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/114219288780488774563\"\u003eNeorion Hotel\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNRRykypEeN56lCsjxS14wAykl4K2zgyJ6z6MZgf_me-fWkU6rYkOEI30Ho5DswJEQsXiIAoFNompTMW2vZkJjyBopVcY2d-iWqk--SPMhJcAg4OUIF3ooFQalemDXbfVZ2gHa81H-4cfaLj8Op9J6kRZf9LQDkaRWs80aY3GfMSu9D1ioUqWqmZ-akzkPQv9pYO047-q-lBFTvqI2rCEJUH7amwpq3UjlCo1F_eoRHVldgg84dvsblFqEtY-0MjdTlR4D3DC6rsEqgjV0QiEeLJY9blsm6Kf-RDaFlfQ4Riq3_LlofHAtg--UTUZBcU93ODrxJYdko",
+                "width" : 6408
+             }
+          ],
+          "place_id" : "ChIJkdoQAcC5yhQR1_MduU-Fm9I",
+          "plus_code" : 
+          {
+             "compound_code" : "2X7G+FM Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X7G+FM"
+          },
+          "rating" : 4.7,
+          "reference" : "ChIJkdoQAcC5yhQR1_MduU-Fm9I",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 833,
+          "vicinity" : "Hoca Paşa, Orhaniye Caddesi No:14"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0055515,
+                "lng" : 28.9801003
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.00689268029149,
+                   "lng" : 28.9814595802915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.00419471970849,
+                   "lng" : 28.9787616197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "GLK PREMIER Regency Suites & Spa",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 2868,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/101024914830431603772\"\u003eGLK PREMIER Regency Suites &amp; Spa\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNT_dtrDFv3Q9oX4J29r5vnZiT0h5ceLNB2Bn80AIci_UoQfFSwfY0p2WoYjq4ECLSBzujVfmI9Wnof_OlYBaSurcgHQXXAOQ4cu_sT9D8UpPhlysY1cZylyoh66GQU-gxl3spwRQ7szzM1hv1kMNAjjE2FsVIcd5lC5U6guHS8r8GgZ0crpq4G60udZiykNsAmIEWm4kzNS1IEj362lRxub8Oo0T1M3gIOO2PiYFXWn6Mo5c_4O13KlOmhDgdUKYw9oYQMlSQcsmycBCwiBpq_3FHy332T6FkX_PdmuIy3sgn2EtuSF1D--vpsPF43-TtRSR4QzRDI",
+                "width" : 2976
+             }
+          ],
+          "place_id" : "ChIJxWo8X7y5yhQRyO_8UL3QtW0",
+          "plus_code" : 
+          {
+             "compound_code" : "2X4J+62 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X4J+62"
+          },
+          "rating" : 4.6,
+          "reference" : "ChIJxWo8X7y5yhQRyO_8UL3QtW0",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "spa",
+             "lodging",
+             "health",
+             "restaurant",
+             "food",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 377,
+          "vicinity" : "Cankurtaran, Akbıyık Caddesi No:46"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0055149,
+                "lng" : 28.9804453
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.00692213029151,
+                   "lng" : 28.9817191302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.00422416970851,
+                   "lng" : 28.9790211697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Byzantium Hotel & Suites",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 751,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/102162785239127171127\"\u003eByzantium Hotel &amp; Suites\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNR5Q3DwISXLvpwESsD-8jQ3XjBNZXKXyUg6oZ2E9mzvXRTMRmTv2GNy-cjODELuEJjDY5liK4PU7cmkGSQU4nOa6idUwp8kok5uTHokRKdM4sLuacR6bgqvKirMlBe5lwqyrzRZkPtj9D2C-oS3olEgE9qXuTuLJ6eX6JgPZ44QAIzYNDs_pt-2PvhZmScnit7x2ptdTsGkyuWgdeNyoGybLoKzTVxbn8Yicl7Gm9Wd8zsnPJbfkQSoCc8sRWWeVB--yib6ws6TclsxV477UFfyxSvy9e2dSqWvB-0DE4u4uoB0DmVoPoyG60cioP2rRhEHpl45tGo",
+                "width" : 500
+             }
+          ],
+          "place_id" : "ChIJn7G0WLy5yhQRWfJbyrmG3UA",
+          "plus_code" : 
+          {
+             "compound_code" : "2X4J+65 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X4J+65"
+          },
+          "rating" : 4.2,
+          "reference" : "ChIJn7G0WLy5yhQRWfJbyrmG3UA",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 1640,
+          "vicinity" : "Cankurtaran, Akbıyık Caddesi No:29"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0138732,
+                "lng" : 28.9787678
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0152443802915,
+                   "lng" : 28.98012183029149
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0125464197085,
+                   "lng" : 28.9774238697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Gülhanepark Hotel & Spa",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 689,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/113241047862516751503\"\u003eGülhanepark Hotel &amp; Spa\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNQYSEBkY-5bgYy7Wwbpv5Y8dAzoRcPNJTda9rTkZy6-cJbyGdDu0CWaOmr3-hClLF8u8GJFoVI62mEhUek5E5n776r_zY2jpQL-AVBffXPNZa5SjM50Vr275EC7jrBlaszFh4L_FcGGzGdAlEV91ghov9ZOlMXm2bI2pE6fSuoJyHt1ZDLHpz5mXdyU5cIMooBLlznpRFfwbYWvyxHZ6q6I81pqUpN43pRNQkotgQOoNdVfy8ZSTyAE_ZhkQopjIjesLRo-Eh9BKl-pzhClpPvPyKqCem87xE7z3pekrLWu8zbiBaRa_QSShT52XpOtUc4C3SmBdTs",
+                "width" : 1007
+             }
+          ],
+          "place_id" : "ChIJV5maacC5yhQRE5f4XdbLLgo",
+          "plus_code" : 
+          {
+             "compound_code" : "2X7H+GG Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X7H+GG"
+          },
+          "rating" : 3.9,
+          "reference" : "ChIJV5maacC5yhQRE5f4XdbLLgo",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "gym",
+             "bar",
+             "spa",
+             "lodging",
+             "health",
+             "restaurant",
+             "food",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 873,
+          "vicinity" : "Hocapaşa Mh, Nöbethane Caddesi No:1"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.00570959999999,
+                "lng" : 28.9807655
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.00706708029151,
+                   "lng" : 28.98212698029149
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.00436911970851,
+                   "lng" : 28.9794290197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Sultan Hostel & Guesthouse",
+          "photos" : 
+          [
+             {
+                "height" : 900,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/103814832946170787878\"\u003eSultan Hostel &amp; Guesthouse\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNToNgu2oPKSVhW1KfPjxvZ3QoJogXMsEOx04KVYKZ-LUGgW9494CHP9zgcxi5wXHnmrcVxhTk8q2xnvLnO1z4o4EiHk187Rdh3N2k8js-owo21R5iSBhMNj5kbQpEaWsf_DIp0udwIjqsvrEemRHIaTshUKWDCdegKGydz7v8rpeIdNCQvMQzeLb9iPVHJfOLuSZDWo8u3bEfcW4IfzeH2QY2Im0jLicOUVx_NPzTrCvRy7d7wX3p21BV10n_UI_1frd-ctpq8834T33qIMrvJvZJI_WggTBXIN-7AWCtDEbjMCt8LaDZzguntHqVpHfkpjrcvPCBU",
+                "width" : 1350
+             }
+          ],
+          "place_id" : "ChIJwek3aby5yhQRRbF5HL-L2VM",
+          "plus_code" : 
+          {
+             "compound_code" : "2X4J+78 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X4J+78"
+          },
+          "rating" : 4,
+          "reference" : "ChIJwek3aby5yhQRRbF5HL-L2VM",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 565,
+          "vicinity" : "Cankurtaran mahallesi Akbıyık caddesi, Terbıyık Sokak no:3"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.009276,
+                "lng" : 28.9756024
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.01059258029149,
+                   "lng" : 28.9769985302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.00789461970849,
+                   "lng" : 28.9743005697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "White House Hotel Istanbul",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 2304,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/101920251377288100647\"\u003eWhite House Hotel Istanbul\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNSms1xeci7PfTB_ly6hzlXtcM2lZHnhtJhj4ybG3ZLnVwp10EIujAob0ixsBoXoDAw53xG-XpvFvMUtLMh2dfmAPA820P1VfOaxt9xt4Z681t_uIE2_gYN2CQ0kZqQshblJkN9atzdh_4hqjV2OT2X8ytGWUwhTMY0cP0EMs5nVjgzGoowU8dr8C0TGDY0uSkeHcLW7Q5FKfKMYlCfd4--I_6BSzcjsXxYu3PcKNfBNnR_1DtD4rlhFADgRRgtnf0TnIwNNBuCuEJTjzfTGHlEMmw2xJasfJpjaOOIqtfCLUtyA9sjf--JybRr1DWwqnH1DoUmDr6g",
+                "width" : 3456
+             }
+          ],
+          "place_id" : "ChIJMxlr-ZW5yhQR9mOS5EyunQ8",
+          "plus_code" : 
+          {
+             "compound_code" : "2X5G+P6 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X5G+P6"
+          },
+          "rating" : 4.9,
+          "reference" : "ChIJMxlr-ZW5yhQR9mOS5EyunQ8",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 1644,
+          "vicinity" : "Old City - Sultanahmet, Alemdar, Çatalçeşme Sokak No:21"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0034589,
+                "lng" : 28.9705278
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0047762302915,
+                   "lng" : 28.97187418029149
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0020782697085,
+                   "lng" : 28.9691762197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Antea Palace Hotel & Spa",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 640,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/101293330212848042590\"\u003eAntea Palace Hotel &amp; Spa\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNRFQH6TvI-Vfuz91aAazglbHIZM6f6KYr6Vog07alDxK7_tyfwGBPsbWgGhA-HXcq1HOixls8pyHk8pbCAFkvemRUiajeExv2hIT1IbFzgAMFVAMn5wqbBrwSi6k3s6TKfrwfQs4mgFfAvqINviS59uJfHh6pw7RnGh7L4bMMqIEFc6OscEQ1IBDwdiifSiIFBud7GVADZNhtzsi3iHvt3veMLTA1XWjYyvnYzhAHpdNyk1hLM7wMdcVx5Sb5L4zGxa_l_bLLVdnK_b_9jAmQO7OEircP8aQPnSPzvKo90c5EkOodqJhLBsUVLFYtzUm4EdmSFc05Q",
+                "width" : 800
+             }
+          ],
+          "place_id" : "ChIJ1VuhxIOnyhQR9DZuOq7hcu0",
+          "plus_code" : 
+          {
+             "compound_code" : "2X3C+96 Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X3C+96"
+          },
+          "rating" : 4.2,
+          "reference" : "ChIJ1VuhxIOnyhQR9DZuOq7hcu0",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 1101,
+          "vicinity" : "Kucuk Ayasofya, Sultan Ahmet, Cinci Meydanı Sokak no:16"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.00446110000001,
+                "lng" : 28.9796963
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.0058510302915,
+                   "lng" : 28.98109098029149
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.0031530697085,
+                   "lng" : 28.97839301970849
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Hotel Sarı Konak | Sultanahmet",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 1456,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/100526477296506194965\"\u003eHotel Sarı Konak | Sultanahmet\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNROZBhBXGkVMilntBcpxVzvZJrSizzeMas2HdmlCRfTSwBpc5zkiEf8kDDmI-S2_e6_MynQppDfrBC9arj-skPvewjYaMr3GFEACI_nOPb65fjOJsbjt9k54g0Y9kVr80mrss8ANhYLUEFCiCG05ZLKWvnpJk5xWAc2qyp7dVaMyyYOf0MdPi8vGhdBHZzlm4HGP9GKPG_k86LShxDMBfwGiu-4Y0nrowBXSlAG_xxcLHtQsJAIkwOwNcuo9I0sDycFBySPuWUKqCXtj5jhfCuh4VbAH575QaP4-6uOeVsB_CK-J4WQZh1Po0N-9Nb5BnuKQ81GpR0",
+                "width" : 2184
+             }
+          ],
+          "place_id" : "ChIJtzan5ry5yhQRcwHJXSffS18",
+          "plus_code" : 
+          {
+             "compound_code" : "2X3H+QV Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X3H+QV"
+          },
+          "rating" : 4.5,
+          "reference" : "ChIJtzan5ry5yhQRcwHJXSffS18",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 273,
+          "vicinity" : "Sultan Ahmet, Mimar Mehmet Ağa Caddesi No: 26"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.00364990000001,
+                "lng" : 28.97408609999999
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.00501438029151,
+                   "lng" : 28.9753796302915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.00231641970851,
+                   "lng" : 28.9726816697085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "ERGUVAN HOTEL",
+          "photos" : 
+          [
+             {
+                "height" : 3024,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/105791352883403520056\"\u003eКира Соколов\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNS8SLpoG049sseodCg4Ct_vNQCVRAVnN1B6MjnCU2nsak1x_HLjPWhVmgpO8wAXLCt9zh2298y02TT3sDkrg6jmXdlMtxiVwPRH3hscVYezqpPFW-uT_t3FQmjraoTzhEhdWW2Y-X9VSj-AdXs3Bff3mBogV1QVgnd31xlfj6AL6X8LA44U6gGsI_KOW4rc-jqyNe6HyUJRpe767CEqUx_Ww6i8lUoWYtXJpf8He7LcPLKnGb1CSu20eJGPwkLMCODu_zeCExLV0R6QNEYVUhd9lNvk6aVqZxnQmX7RlRFP8KsoNZTczvF7hoX0dOup-SqIIs5YKDdUglGtMIfxuqo9tioJtYyT7qG0kz3sJY8M4VeOcHjnukng2jfQxAg0fRlhsTkycPWIDW0x0ER5Mx5N0nhQm5rPvZtDlWQ0rTmzMKIifxnZI4tSl9CJWCzwgy50AHrLm6XChjRVZRDAF9yWlYQysZ6AnPX5HDiz8w27TRD41mFtEc3dor8ujYpFk5QuzbwHWSc-78aWbQ3YMdeMmOxquMPbT29tSgCXlIe1oYRP56peCbT3ZgpIo_LxscML8HybFcZ9whjwEu1OEzipjo0ONDXOgjG8_E8X3A_TZNO-rYN98Xr4tiJrSw80hOcogw",
+                "width" : 4032
+             }
+          ],
+          "place_id" : "ChIJMbKMR5i5yhQRZb5GoLpy-Lk",
+          "plus_code" : 
+          {
+             "compound_code" : "2X3F+FJ Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X3F+FJ"
+          },
+          "rating" : 4.4,
+          "reference" : "ChIJMbKMR5i5yhQRZb5GoLpy-Lk",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 442,
+          "vicinity" : "Küçük Ayasofya, Aksakal Sokağı No:3"
+       },
+       {
+          "business_status" : "OPERATIONAL",
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.01356699999999,
+                "lng" : 28.9763031
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.01490543029149,
+                   "lng" : 28.9776994802915
+                },
+                "southwest" : 
+                {
+                   "lat" : 41.01220746970849,
+                   "lng" : 28.9750015197085
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+          "icon_background_color" : "#909CE1",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+          "name" : "Istanbul Hotel Ipek Palas",
+          "opening_hours" : 
+          {
+             "open_now" : true
+          },
+          "photos" : 
+          [
+             {
+                "height" : 3000,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/109775897860233657168\"\u003eBeg Begowski\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNQbwrnVnz2P_qQJjvWSJ_rYHySdFrcSI6Im7Vtx1LWHFRO_KisL9_-kEzW96FHe1FfesoMue02_vxfl9YLTk7m1t0BBagrV1p7lnOSggcHmi2FO3mlUgzAUkNAgnOc_SsoTPL_12HXfZ0nyfCqIbpkyyLTVoyiBSEiXaZMWy4xbkFZFUSMCdtje434fXOQpFYkssOa5colwSO8pKVlZs6FCav3x5w30E2XMNwgT8xx3-kJYwOvJlZaIg5hAQxq_HXb9BQjG1QPzmkxeAxhHzu0vSSHZ0Ym7a3cRvp941Au_CpU1d6I_hKYEqy2SAarnVnnJzGFCrK2EiF3MtgSJ2Tv5ew50Pb-14XonhYIcDfeBouMquMGp5Sle835-yvIjnYZWh4wdO-k3mm7jtWBHYC5-h4uV4qWQqQtr6WsBC5yjzotYxAE_Yg1ML4MhGyTtYNbyNdxrHU-org81dP0pzTMihTOHwzsmVFksDZrCbl9w-_Zuxw7qvvoQz04d6HG61P1qpiK6FdktSTxwef2iMRv-AkGHsWDGGBQZYWoQczt7e64loZ5bMDT6sV0QQ3LTA-v2fx-kqiakVDzYsDEW20BQB43Ca4Ul4AmkezMeLrXpxDqOsqPJcTFEyGSK39xCOLl7Fw",
+                "width" : 4000
+             }
+          ],
+          "place_id" : "ChIJXxpEAMC5yhQRUeJo_yg3Y0g",
+          "plus_code" : 
+          {
+             "compound_code" : "2X7G+CG Fatih/İstanbul, Türkiye",
+             "global_code" : "8GHC2X7G+CG"
+          },
+          "rating" : 3.8,
+          "reference" : "ChIJXxpEAMC5yhQRUeJo_yg3Y0g",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "lodging",
+             "point_of_interest",
+             "establishment"
+          ],
+          "user_ratings_total" : 1169,
+          "vicinity" : "Hoca Paşa, Orhaniye Caddesi No:7"
+       },
+       {
+          "geometry" : 
+          {
+             "location" : 
+             {
+                "lat" : 41.0286909,
+                "lng" : 28.92404269999999
+             },
+             "viewport" : 
+             {
+                "northeast" : 
+                {
+                   "lat" : 41.19923904591783,
+                   "lng" : 29.0774870301546
+                },
+                "southwest" : 
+                {
+                   "lat" : 40.95450797366489,
+                   "lng" : 28.59555403926175
+                }
+             }
+          },
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png",
+          "icon_background_color" : "#7B9EB0",
+          "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+          "name" : "European Side",
+          "photos" : 
+          [
+             {
+                "height" : 4000,
+                "html_attributions" : 
+                [
+                   "\u003ca href=\"https://maps.google.com/maps/contrib/114413848814355150234\"\u003eMehmet Coşkun\u003c/a\u003e"
+                ],
+                "photo_reference" : "AXQCQNRU4uLqbDh1IWvcWB2U6WXwDFh8a4LX4RmdBYpMSPOEKCsa0EWrYcJJOIXYXp1AytCTQ0xAaFp3E56D3DcB4pUmTxKITL5nsja92V8VdtInt1ZF234HwWfSutxlkJn7F76XAF45LOkfRa8VYQvhBGA0aNtrLRQC4OnBkh0Vz8FksnQvJ8EPK2T1ycK8YisvU20GRvEWfhizj0r17Cna6z0zONWooIIHLnaY3Coldi4du05YLPITjuIAEK2rFrz3IMzBq2In0mpNJ5LcawBhancOM2cWJeIYN3IYjIwRNjpw62eS4crTe_F82Re29LTwXqWhsZIYW2mOp4DcDLlaVcX72GsUeIwKe4vQghQBeaWRhJaNbSDbqI_c6PdMsvNdunVpP4J5AY7wFNk81lOQewhvjNjIE6FEzBzmTFqPA1Ai9g6Ryok8vVLaiXZpdXBpoBNUOOAbjiP5VPkJAwzGvDCtTRCjude9ftw_isMuu4xkDQDc7JDjC924AXT7kitt5YTp9girhCwksjtu3Ar8gF23ItS_nNwTTd-uMkLZ0GD6jr6cM-zehokenF7mL80NIVyarZy85czFEbOjoe3LiD1LvlHGf5hqcYVP8-J4uq6j5KLGfxoA8BYY-VWxJ2NKeLOv_8Js",
+                "width" : 2250
+             }
+          ],
+          "place_id" : "ChIJhTq6hpGkyhQRC5OjsPQ0MVY",
+          "reference" : "ChIJhTq6hpGkyhQRC5OjsPQ0MVY",
+          "scope" : "GOOGLE",
+          "types" : 
+          [
+             "neighborhood",
+             "political"
+          ]
+       }
+    ],
+    "status" : "OK"
+ }

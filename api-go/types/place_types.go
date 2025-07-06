@@ -19,7 +19,7 @@ type Marker struct {
 }
 
 type NearbyPlacesResponse struct {
-	Markers []Marker `json:"markers"`
+	Markers []PlaceWithRadius `json:"markers"`
 	Filters struct {
 		Radius      float64 `json:"radius"`
 		ZoomLevel   int     `json:"zoomLevel"`

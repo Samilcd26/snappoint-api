@@ -1,13 +1,17 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"os"
+	"regexp"
+	"strconv"
+	"strings"
 	"time"
 
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/snap-point/api-go/config"
 	"github.com/snap-point/api-go/models"
 	"github.com/snap-point/api-go/utils"
 	"golang.org/x/crypto/bcrypt"
@@ -15,54 +19,249 @@ import (
 )
 
 type AuthController struct {
-	DB *gorm.DB
+	DB               *gorm.DB
+	GoogleConfig     *config.GoogleConfig
+	UploadController *UploadController
 }
 
-func NewAuthController(db *gorm.DB) *AuthController {
-	return &AuthController{DB: db}
+// validateUsernamePattern validates username format and constraints
+func validateUsernamePattern(username string) error {
+	// Remove spaces for validation but keep original case
+	trimmedUsername := strings.TrimSpace(username)
+	
+	// Check minimum length
+	if len(trimmedUsername) < 3 {
+		return fmt.Errorf("username must be at least 3 characters long")
+	}
+	
+	// Check maximum length
+	if len(trimmedUsername) > 20 {
+		return fmt.Errorf("username must be no more than 20 characters long")
+	}
+	
+	// Check if username starts with a letter
+	startsWithLetter, _ := regexp.MatchString(`^[a-zA-Z]`, trimmedUsername)
+	if !startsWithLetter {
+		return fmt.Errorf("username must start with a letter")
+	}
+	
+	// Check if username contains only allowed characters (letters, numbers, underscore)
+	validPattern, _ := regexp.MatchString(`^[a-zA-Z][a-zA-Z0-9_]*$`, trimmedUsername)
+	if !validPattern {
+		return fmt.Errorf("username can only contain letters, numbers, and underscores")
+	}
+	
+	// Check for reserved usernames
+	reserved := []string{"admin", "root", "api", "www", "mail", "ftp", "test", "demo", "user", "guest", "null", "undefined"}
+	for _, reservedWord := range reserved {
+		if strings.ToLower(trimmedUsername) == reservedWord {
+			return fmt.Errorf("this username is reserved and cannot be used")
+		}
+	}
+	
+	return nil
+}
+
+func NewAuthController(db *gorm.DB, uploadController *UploadController) *AuthController {
+	return &AuthController{
+		DB:               db,
+		GoogleConfig:     config.NewGoogleConfig(),
+		UploadController: uploadController,
+	}
 }
 
 func (ac *AuthController) Register(c *gin.Context) {
 	var input struct {
-		Username  string `json:"username" binding:"required"`
-		Email     string `json:"email" binding:"required,email"`
-		Password  string `json:"password" binding:"required,min=6"`
-		FirstName string `json:"firstName"`
-		LastName  string `json:"lastName"`
-		Phone     string `json:"phone"`
-		Role      int `json:"role"`
+		Username     string `json:"username" binding:"required"`
+		Email        string `json:"email" binding:"required,email"`
+		Password     string `json:"password" binding:"required,min=6"`
+		FirstName    string `json:"firstName" binding:"required"`
+		LastName     string `json:"lastName" binding:"required"`
+		Gender       string `json:"gender"`
+		Birthday     string `json:"birthday"`
+		Phone        string `json:"phone"`
+		Avatar       string `json:"avatar"`
+		AvatarTempKey string `json:"avatarTempKey"`
 	}
 
 	
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "success": false})
 		return
 	}
-	fmt.Println(c)
+	
+	// Validate username pattern
+	if err := validateUsernamePattern(input.Username); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "success": false})
+		return
+	}
 	
 	// Hash password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not hash password"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not hash password", "success": false})
 		return
 	}
 
+	hashedPasswordStr := string(hashedPassword)
+	
+	// Parse birthday if provided
+	var birthday *time.Time
+	if input.Birthday != "" {
+		if parsed, err := time.Parse("2006-01-02", input.Birthday); err == nil {
+			birthday = &parsed
+		}
+	}
+	
+	// Handle phone field - use nil if empty
+	var phone *string
+	if input.Phone != "" {
+		phone = &input.Phone
+	}
+	
 	user := models.User{
-		Username:  input.Username,
-		Email:     input.Email,
-		Password:  string(hashedPassword),
-		FirstName: input.FirstName,
-		LastName:  input.LastName,
-		Phone:     input.Phone,
-		RoleID:    uint(input.Role),
+		Username:    input.Username,
+		Email:       input.Email,
+		Password:    &hashedPasswordStr,
+		FirstName:   input.FirstName,
+		LastName:    input.LastName,
+		Gender:      input.Gender,
+		Birthday:    birthday,
+		Phone:       phone,
+		Avatar:      input.Avatar,
+		GoogleID:    nil, // Explicitly set to nil for email registration
+		RoleID:      1, // Default role
+		Provider:    "email",
+		TotalPoints: 0,
+		IsVerified:  false,
+		EmailVerified: false,
+		PhoneVerified: false,
 	}
 
 	if err := ac.DB.Create(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Username or email already exists"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Username or email already exists", "success": false})
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully", "user": user})
+	var finalAvatarURL string
+	if input.AvatarTempKey != "" {
+		finalAvatarURL = ac.confirmAvatarUpload(input.AvatarTempKey, user.ID)
+		if finalAvatarURL != "" {
+			user.Avatar = finalAvatarURL
+			ac.DB.Save(&user)
+		}
+	}
+
+	
+
+	response := gin.H{
+		"success": true,
+		"message": "User registered successfully", 
+		"user": gin.H{
+			"id": user.ID,
+			"email": user.Email,
+			"username": user.Username,
+			"firstName": user.FirstName,
+			"lastName": user.LastName,
+		},
+	}
+
+	if finalAvatarURL != "" {
+		response["user"].(gin.H)["avatar"] = finalAvatarURL
+	}
+
+	c.JSON(http.StatusCreated, response)
+}
+
+func (ac *AuthController) VerifyEmail(c *gin.Context) {
+	var input struct {
+		Email string `json:"email" binding:"required,email"`
+	}
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "success": false})
+		return
+	}
+
+	var user models.User
+	if err := ac.DB.Where("email = ?", input.Email).First(&user).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Email not found", "success": false})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "Email verified successfully",
+		"user_id": user.ID,
+	})
+}
+
+func (ac *AuthController) RegisterEmailCheck(c *gin.Context) {
+	var input struct {
+		Email string `json:"email" binding:"required,email"`
+	}
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "success": false})
+		return
+	}
+
+	var user models.User
+	if err := ac.DB.Where("email = ?", input.Email).First(&user).Error; err != nil {
+		// Email not found - good for registration
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Email available for registration",
+			"available": true,
+		})
+		return
+	}
+
+	// Email already exists
+	c.JSON(http.StatusConflict, gin.H{
+		"success": false,
+		"error": "Email already registered",
+		"available": false,
+	})
+}
+
+func (ac *AuthController) RegisterUsernameCheck(c *gin.Context) {
+	var input struct {
+		Username string `json:"username" binding:"required"`
+	}
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "success": false})
+		return
+	}
+
+	// Validate username pattern
+	if err := validateUsernamePattern(input.Username); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success": false,
+			"error": err.Error(),
+			"available": false,
+		})
+		return
+	}
+
+	var user models.User
+	if err := ac.DB.Where("username = ?", input.Username).First(&user).Error; err != nil {
+		// Username not found - good for registration
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Username available for registration",
+			"available": true,
+		})
+		return
+	}
+
+	// Username already exists
+	c.JSON(http.StatusConflict, gin.H{
+		"success": false,
+		"error": "Username already taken",
+		"available": false,
+	})
 }
 
 func (ac *AuthController) Login(c *gin.Context) {
@@ -82,7 +281,12 @@ func (ac *AuthController) Login(c *gin.Context) {
 		return
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
+	if user.Password == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		return
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(*user.Password), []byte(input.Password)); err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return
 	}
@@ -310,4 +514,163 @@ func (ac *AuthController) Logout(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Logged out successfully", "success": true})
+}
+
+func (ac *AuthController) GoogleLogin(c *gin.Context) {
+	var input struct {
+		IDToken      string `json:"id_token"`
+		AccessToken  string `json:"access_token"`
+		Code         string `json:"code"`
+		RedirectURI  string `json:"redirect_uri"`
+	}
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "success": false})
+		return
+	}
+
+	// Verify Google ID token or exchange code
+	var userInfo *config.GoogleUserInfo
+	var err error
+
+	if input.Code != "" && input.RedirectURI != "" {
+		// Exchange authorization code for tokens
+		ctx := c.Request.Context()
+		token, err := ac.GoogleConfig.ExchangeCode(ctx, input.Code)
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Failed to exchange code for token", "success": false})
+			return
+		}
+		
+		userInfo, err = ac.GoogleConfig.GetUserInfo(token.AccessToken)
+	} else if input.IDToken != "" {
+		userInfo, err = ac.GoogleConfig.VerifyIDToken(input.IDToken)
+	} else if input.AccessToken != "" {
+		userInfo, err = ac.GoogleConfig.GetUserInfo(input.AccessToken)
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Either code with redirect_uri, id_token, or access_token is required", "success": false})
+		return
+	}
+
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Google token", "success": false})
+		return
+	}
+
+	// Check if user already exists
+	var user models.User
+	userExists := ac.DB.Where("google_id = ? OR email = ?", userInfo.ID, userInfo.Email).First(&user).Error == nil
+
+	if userExists {
+		// Update existing user's Google info if needed
+		if user.GoogleID == nil || *user.GoogleID == "" {
+			user.GoogleID = &userInfo.ID
+			user.Provider = "google"
+			user.ProviderID = userInfo.ID
+			if user.Avatar == "" && userInfo.Picture != "" {
+				user.Avatar = userInfo.Picture
+			}
+			ac.DB.Save(&user)
+		}
+	} else {
+		// Create new user
+		// Generate unique username from email
+		username := userInfo.Email
+		counter := 1
+		for {
+			var existingUser models.User
+			if ac.DB.Where("username = ?", username).First(&existingUser).Error != nil {
+				break
+			}
+			username = userInfo.Email + strconv.Itoa(counter)
+			counter++
+		}
+
+		// Get default role (assume role ID 1 is user role)
+		var defaultRole models.Role
+		if err := ac.DB.Where("name = ?", "user").First(&defaultRole).Error; err != nil {
+			// If no user role found, use role ID 1 as fallback
+			defaultRole.ID = 1
+		}
+
+		user = models.User{
+			Username:      username,
+			Email:         userInfo.Email,
+			FirstName:     userInfo.GivenName,
+			LastName:      userInfo.FamilyName,
+			Avatar:        userInfo.Picture,
+			GoogleID:      &userInfo.ID,
+			Provider:      "google",
+			ProviderID:    userInfo.ID,
+			RoleID:        defaultRole.ID,
+			EmailVerified: userInfo.VerifiedEmail,
+			IsVerified:    userInfo.VerifiedEmail,
+		}
+
+		if err := ac.DB.Create(&user).Error; err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create user", "success": false})
+			return
+		}
+	}
+
+	// Get user role
+	var role models.Role
+	if err := ac.DB.First(&role, user.RoleID).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch user role", "success": false})
+		return
+	}
+
+	// Generate JWT tokens
+	accessTokenBase := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"user_id": user.ID,
+		"role":    role.Name,
+		"exp":     time.Now().Add(time.Hour * 24 * 7).Unix(),
+	})
+
+	refreshTokenBase := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"user_id": user.ID,
+		"exp":     time.Now().Add(time.Hour * 24 * 30).Unix(),
+	})
+
+	accessToken, err := accessTokenBase.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not generate access token", "success": false})
+		return
+	}
+
+	refreshToken, err := refreshTokenBase.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not generate refresh token", "success": false})
+		return
+	}
+
+	// Save refresh token
+	ac.DB.Create(&models.RefreshToken{
+		UserID:         user.ID,
+		Token:          refreshToken,
+		ExpirationDate: time.Now().Add(time.Hour * 24 * 30),
+	})
+
+	c.JSON(http.StatusOK, gin.H{
+		"token_type":    "Bearer",
+		"access_token":  accessToken,
+		"refresh_token": refreshToken,
+		"user":          gin.H{"id": user.ID, "email": user.Email, "username": user.Username, "profilePicture": user.Avatar},
+		"success":       true,
+	})
+}
+
+func (ac *AuthController) confirmAvatarUpload(tempKey string, userID uint) string {
+	if ac.UploadController == nil {
+		return ""
+	}
+
+	permanentKey := ac.UploadController.generateAvatarKey(userID, tempKey)
+	
+	err := ac.UploadController.moveFile(tempKey, permanentKey)
+	if err != nil {
+		return ""
+	}
+
+	return fmt.Sprintf("%s/%s", ac.UploadController.R2Config.PublicURL, permanentKey)
 }

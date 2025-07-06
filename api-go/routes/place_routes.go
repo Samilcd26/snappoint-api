@@ -11,5 +11,6 @@ func SetupPlaceRoutes(protected *gin.RouterGroup, placeController *controllers.P
 		places.GET("/nearby", placeController.GetNearbyPlaces)
 		places.GET("/:placeId/profile", placeController.GetPlaceProfile)
 		places.GET("/:placeId/posts", placeController.GetPlacePosts)
+		places.GET("/:placeId/validate-location", placeController.ValidatePostLocation)
 	}
 }

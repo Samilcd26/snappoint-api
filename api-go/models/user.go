@@ -15,12 +15,16 @@ type User struct {
 	FirstName     string         `json:"first_name"`
 	LastName      string         `json:"last_name"`
 	Gender        string         `json:"gender"`
-	Birthday      time.Time      `json:"birthday"`
+	Birthday      *time.Time     `json:"birthday"`
 	Email         string         `gorm:"unique;not null" json:"email"`
-	Phone         string         `gorm:"unique;not null" json:"phone"`
-	Password      string         `gorm:"not null" json:"-"` // Don't expose password in JSON
+	Phone         *string        `gorm:"unique" json:"phone"`
+	Password      *string        `json:"-"` // Nullable for OAuth users
 	Bio           string         `json:"bio"`
 	Avatar        string         `json:"avatar"`
+	// OAuth fields
+	GoogleID   *string `gorm:"unique" json:"google_id"`
+	Provider   string `gorm:"default:'email'" json:"provider"` // email, google, apple, etc.
+	ProviderID string `json:"provider_id"`
 	Posts         []Post         `json:"posts" gorm:"foreignKey:UserID"`
 	Comments      []Comment      `json:"comments" gorm:"foreignKey:UserID"`
 	Likes         []Like         `json:"likes" gorm:"foreignKey:UserID"`
